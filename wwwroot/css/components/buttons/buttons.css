@@ -1,0 +1,52 @@
+.btn {
+    --bs-btn-font-family: var(--bs-body-font-family);
+    --bs-btn-font-size: var(--bs-body-font-size);
+    --bs-btn-font-weight: var(--bs-body-font-weight);
+}
+
+.btn-primary {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: rgba(var(--bs-primary-light-rgb));
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #3a88d5;
+    --bs-btn-hover-border-color: var(--bs-primary);
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0a58ca;
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: rgba(255, 255, 255, .9);
+    --bs-btn-disabled-bg: rgba(var(--bs-primary-rgb), .9);
+    --bs-btn-disabled-border-color: rgba(var(--bs-primary-rgb), .0);
+}
+
+.btn-table {
+    padding: .375rem .6rem;
+}
+
+.btn-table i {
+    min-width: 0.875rem;
+    color: var(--bs-primary-dark);
+}
+
+.btn-table.remove i {
+    color: var(--bs-danger);
+}
+
+.btn-table.remove:hover {
+    background-color: var(--bs-danger);
+}
+
+.btn-table.remove:hover i {
+    color: var(--bs-white);
+}
+
+.btn-table:hover {
+    background-color: var(--bs-primary-dark);
+    color: var(--bs-white);
+}
+
+.btn-table:hover i {
+    color: var(--bs-white);
+}

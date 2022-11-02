@@ -1,0 +1,15 @@
+{
+  "name": "apolisys",
+  "version": "1.0.0",
+  "description": "Sistema para gerenciamento de processos corriqueiros de uma Seguradora de Automóveis",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "João Henrique, Rafael Cardoso, Talina Cruz, Victor Hugo Laveso, Victor Fernando Martins",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "jquery": "^3.6.1",
+    "jquery-mask-plugin": "^1.14.16"
+  }
+}

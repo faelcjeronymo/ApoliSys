@@ -1,0 +1,6 @@
+.circle-check-green {
+    color: var(--bs-success);
+}
+.times-circle-red {
+    color: var(--bs-danger);
+}

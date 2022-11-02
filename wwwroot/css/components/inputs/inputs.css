@@ -1,0 +1,41 @@
+.form-control {
+    padding: .45rem .9rem;
+    font-size: var(--bs-body-font-size);
+    font-weight: 500;
+    line-height: 1.565;
+    color: rgba(var(--bs-body-color-rgb), .75);
+    background-color: var(--bs-white);
+    border: 1px solid var(--bs-card-border-color);
+    transition: border-color .15s ease-in-out;
+}
+
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-white);
+    border-color: rgba(var(--bs-primary-dark-rgb), .35);
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-control.search-input {
+    background-color: #f0f3f8;
+    padding: .6rem 20px .6rem 38px;
+    border: none;
+    position: relative;
+    line-height: 1.5;
+}
+
+.form-control.search-input::placeholder {
+    color: rgba(var(--bs-body-color-rgb), .3);
+    font-size: .845rem;
+}
+
+.form-control.search-input ~ .search-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+    font-size: 1rem;
+    color: rgba(var(--bs-body-color-rgb), .4);
+    z-index: 100;
+}

@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - ApoliSys</title>
+
+    <link rel="stylesheet" href="~/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        @* Font Awesome *@
+    <script src="https://kit.fontawesome.com/5a992afea4.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="application">
+        @* Sidebar *@
+        <aside class="aside-sidebar collapse collapse-horizontal" id="sidebar">
+            @* Sidebar Navigation *@
+            <nav class="navbar sidebar shadow">
+                <div class="sidebar-header">
+                    <a href="/" class="text-decoration-none py-3 sidebar-logo">
+                        <span class="text-primary h3 fw-semibold m-0">Apoli</span><span class="text-primary-dark h3 fw-semibold m-0">Sys</span>
+                    </a>
+                    <button class="fa btn-close d-xxl-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Fechar barra lateral"></button>
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#segurados-submenu" aria-expanded="false">
+                            <i class="fa fa-users sidebar-nav-item-icon"></i>
+                            <span>Segurados</span>
+                            <i class="fa sidebar-nav-item-arrow"></i>
+                        </button>
+                        <div class="collapse sidebar-nav-item-collapse" id="segurados-submenu">
+                            <ul>
+                                <li>
+                                    <a href="/segurados/" class="btn btn-toggle">
+                                        <i class="fa fa-list me-1"></i>
+                                        <span>Cadastrados</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn btn-toggle">
+                                        <i class="fa fa-plus me-1"></i>
+                                        <span>Cadastrar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#veiculos-submenu" aria-expanded="false">
+                            <i class="fa fa-car-side sidebar-nav-item-icon"></i>
+                            <span>Veículos</span>
+                            <i class="fa sidebar-nav-item-arrow"></i>
+                        </button>
+                        <div class="collapse sidebar-nav-item-collapse" id="veiculos-submenu">
+                            <ul>
+                                <li>
+                                    <a href="/veiculos/" class="btn btn-toggle">
+                                        <i class="fa fa-list me-1"></i>
+                                        <span>Cadastrados</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn btn-toggle">
+                                        <i class="fa fa-plus me-1"></i>
+                                        <span>Cadastrar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#cotacoes-submenu" aria-expanded="false">
+                            <i class="fa fa-list-check sidebar-nav-item-icon"></i>
+                            <span>Cotações</span>
+                            <i class="fa sidebar-nav-item-arrow"></i>
+                        </button>
+                        <div class="collapse sidebar-nav-item-collapse" id="cotacoes-submenu">
+                            <ul>
+                                <li>
+                                    <a href="/cotacoes/" class="btn btn-toggle">
+                                        <i class="fa fa-list me-1"></i>
+                                        <span>Geradas</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn btn-toggle">
+                                        <i class="fa fa-plus me-1"></i>
+                                        <span>Gerar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <button class="btn btn-toggle"data-bs-toggle="collapse" data-bs-target="#apolices-submenu" aria-expanded="false">
+                            <i class="fa fa-file-lines sidebar-nav-item-icon"></i>
+                            <span>Apólices</span>
+                            <i class="fa sidebar-nav-item-arrow"></i>
+                        </button>
+                        <div class="collapse sidebar-nav-item-collapse" id="apolices-submenu">
+                            <ul>
+                                <li>
+                                    <a href="/apolices/" class="btn btn-toggle">
+                                        <i class="fa fa-list me-1"></i>
+                                        <span>Emitidas</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn btn-toggle">
+                                        <i class="fa fa-plus me-1"></i>
+                                        <span>Emitir</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="page-wrapper">
+            @* Header *@
+            <header>
+                <nav class="navbar header px-4">
+                    <div class="container-fluid justify-content-between">
+                        <button class="navbar-toggler px-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Expandir Sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <a href="/" class="text-decoration-none sidebar-logo d-none d-md-block">
+                            <span class="text-white h3 fw-semibold m-0">Apoli</span><span class="text-primary-dark h3 fw-semibold m-0">Sys</span>
+                        </a>
+                        <div class="navbar-profile dropdown">
+                            <a class="navbar-profile-toggler" data-bs-toggle="dropdown" aria-expanded="false" role="button"></a>
+                            <span class="navbar-profile-text fw-semibold">Meu Perfil</span>
+                            <img src="~/img/imagem-rafael.png" alt="Imagem do usuário">
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#sair">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <span>Sair</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            @* Main content *@
+            <main class="main-content" role="main">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="container-fluid">
+                            <div class="row justify-content-between align-items-center">
+                                <h5 class="col-12 col-md-auto mb-3 mb-md-0 text-primary card-title m-0">@ViewData["PageTitle"]</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

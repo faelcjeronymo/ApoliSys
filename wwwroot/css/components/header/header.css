@@ -1,0 +1,64 @@
+.navbar.header { 
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(75, 161, 245)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--bs-primary);
+    border-bottom: none;
+    height: 68px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.navbar.header .navbar-toggler {
+    border: none;
+    transition: 150ms ease-in;
+}
+
+.navbar.header .navbar-toggler i {
+    color: var(--bs-white);
+    font-size: 1.5rem;
+    transition: color 350ms;
+}
+
+.navbar.header .navbar-toggler:hover i {
+    transition: color 350ms;
+    color: var(--bs-primary-dark);
+}
+
+.navbar.header .navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+.navbar.header .navbar-profile {
+    position: relative;
+}
+
+.navbar.header .navbar-profile .navbar-profile-toggler {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+
+.navbar-profile .navbar-profile-toggler:hover ~ .navbar-profile-text, .navbar-profile .navbar-profile-toggler:hover ~ .navbar-profile-arrow {
+    color: var(--bs-primary-dark);
+    transition: color 250ms ease-in;
+}
+
+.navbar.header .navbar-profile > * {
+    color: var(--bs-white);
+    transition: color 250ms ease-in;
+}
+
+.navbar.header .navbar-profile img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    object-fit: cover;
+}
