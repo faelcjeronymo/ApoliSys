@@ -8,6 +8,13 @@ namespace ApoliSys.Controllers
 {
     public class SeguradoController : Controller
     {
+        private readonly ILogger<SeguradoController> _logger;
+
+        public SeguradoController(ILogger<SeguradoController> logger)
+        {
+            _logger = logger;
+        }
+
         public IActionResult Index()
         {
             return View();
