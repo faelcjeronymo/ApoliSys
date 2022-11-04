@@ -7,12 +7,13 @@
     background-color: var(--bs-primary);
     border-bottom: none;
     height: 68px;
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.2);
 }
 
 .navbar.header .navbar-toggler {
     border: none;
     transition: 150ms ease-in;
+    z-index: 1001;
 }
 
 .navbar.header .navbar-toggler i {
@@ -30,6 +31,16 @@
     text-decoration: none;
     outline: 0;
     box-shadow: none;
+}
+
+.navbar.header .navbar-header-logo {
+    opacity: .6;
+    transition: opacity 350ms;
+}
+
+.navbar.header .navbar-header-logo:hover {
+    opacity: 1;
+    transition: opacity 350ms;
 }
 
 .navbar.header .navbar-profile {

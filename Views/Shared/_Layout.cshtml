@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="~/node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        @* Font Awesome *@
+    @* Font Awesome *@
     <script src="https://kit.fontawesome.com/5a992afea4.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -34,7 +34,7 @@
                         <div class="collapse sidebar-nav-item-collapse" id="segurados-submenu">
                             <ul>
                                 <li>
-                                    <a href="/segurados/" class="btn btn-toggle">
+                                    <a asp-controller="Segurado" asp-action="Index" class="btn btn-toggle" role="button">
                                         <i class="fa fa-list me-1"></i>
                                         <span>Cadastrados</span>
                                     </a>
@@ -57,13 +57,13 @@
                         <div class="collapse sidebar-nav-item-collapse" id="veiculos-submenu">
                             <ul>
                                 <li>
-                                    <a href="/veiculos/" class="btn btn-toggle">
+                                    <a asp-controller="Veiculo" asp-action="Index" class="btn btn-toggle">
                                         <i class="fa fa-list me-1"></i>
                                         <span>Cadastrados</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn btn-toggle">
+                                    <a asp-controller="Veiculo" asp-action="Cadastrar" class="btn btn-toggle">
                                         <i class="fa fa-plus me-1"></i>
                                         <span>Cadastrar</span>
                                     </a>
@@ -80,7 +80,7 @@
                         <div class="collapse sidebar-nav-item-collapse" id="cotacoes-submenu">
                             <ul>
                                 <li>
-                                    <a href="/cotacoes/" class="btn btn-toggle">
+                                    <a asp-controller="Cotacao" asp-action="Index" class="btn btn-toggle">
                                         <i class="fa fa-list me-1"></i>
                                         <span>Geradas</span>
                                     </a>
@@ -103,7 +103,7 @@
                         <div class="collapse sidebar-nav-item-collapse" id="apolices-submenu">
                             <ul>
                                 <li>
-                                    <a href="/apolices/" class="btn btn-toggle">
+                                    <a asp-controller="Apolice" asp-action="Index" class="btn btn-toggle">
                                         <i class="fa fa-list me-1"></i>
                                         <span>Emitidas</span>
                                     </a>
@@ -112,6 +112,29 @@
                                     <a href="#" class="btn btn-toggle">
                                         <i class="fa fa-plus me-1"></i>
                                         <span>Emitir</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#usuarios-submenu" aria-expanded="false">
+                            <i class="fa fa-user-gear sidebar-nav-item-icon"></i>
+                            <span>Usuários</span>
+                            <i class="fa sidebar-nav-item-arrow"></i>
+                        </button>
+                        <div class="collapse sidebar-nav-item-collapse" id="usuarios-submenu">
+                            <ul>
+                                <li>
+                                    <a asp-controller="Usuario" asp-action="Index" class="btn btn-toggle" role="button">
+                                        <i class="fa fa-list me-1"></i>
+                                        <span>Cadastrados</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn btn-toggle">
+                                        <i class="fa fa-plus me-1"></i>
+                                        <span>Cadastrar</span>
                                     </a>
                                 </li>
                             </ul>
@@ -128,7 +151,7 @@
                         <button class="navbar-toggler px-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Expandir Sidebar">
                             <i class="fa fa-bars"></i>
                         </button>
-                        <a href="/" class="text-decoration-none sidebar-logo d-none d-md-block">
+                        <a href="/" class="text-decoration-none navbar-header-logo d-none d-md-block">
                             <span class="text-white h3 fw-semibold m-0">Apoli</span><span class="text-primary-dark h3 fw-semibold m-0">Sys</span>
                         </a>
                         <div class="navbar-profile dropdown">

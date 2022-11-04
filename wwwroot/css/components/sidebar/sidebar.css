@@ -103,7 +103,7 @@
 .navbar.sidebar .sidebar-nav .sidebar-nav-item .sidebar-nav-item-collapse ul li a.btn-toggle {
     display: inline-flex;
     text-decoration: none;
-    color: var(--bs-primary);
+    color: var(--bs-primary-dark);
     font-size: .9rem;
 }
 
@@ -119,16 +119,11 @@
 .navbar.sidebar .sidebar-nav .sidebar-nav-item .btn-toggle .sidebar-nav-item-icon {
     min-width: 1.25rem;
     margin-right: .5rem;
+    font-size: 1rem;
 }
 
 .navbar.sidebar .sidebar-nav .sidebar-nav-item .btn-toggle:hover {
     background-color: rgba(var(--bs-primary-dark-rgb), .1);
-}
-
-.navbar.sidebar .sidebar-nav .sidebar-nav-item .btn-toggle[aria-expanded="true"] {
-    transition: background-color 250ms;
-    background-color: var(--bs-primary-dark);
-    color: var(--bs-white);
 }
 
 .navbar.sidebar .sidebar-nav .sidebar-nav-item .btn-toggle .sidebar-nav-item-arrow {

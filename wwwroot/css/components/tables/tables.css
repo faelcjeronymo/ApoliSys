@@ -36,6 +36,7 @@ tbody, td, tfoot, th, thead, tr {
 
 .table tbody tr {
     position: relative;
+    background-color: var(--bs-white);
 }
 
 th {

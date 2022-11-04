@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Segurados";
+    ViewData["Title"] = "Veículos";
 }
 
 <div class="row">
@@ -10,46 +10,46 @@
                     <tr>
                         <th>
                             <div class="d-flex align-items-center">
-                                <i class="fa fa-user"></i>
-                                Nome
+                                <i class="fa fa-car-side"></i>
+                                Modelo
                             </div>
                         </th>
                         <th>
                             <div class="d-flex align-items-center">
-                                <i class="fa fa-id-card"></i>
-                                CPF
+                                <i class="fa fa-hashtag"></i>
+                                Placa
                             </div>
                         </th>
                         <th>
                             <div class="d-flex align-items-center">
-                                <i class="fa fa-baby"></i>
-                                Data de Nascimento
+                                <i class="fa fa-wallet"></i>
+                                RENAVAM
                             </div>
                         </th>
                         <th>
                             <div class="d-flex align-items-center">
-                                <i class="fa fa-square-phone"></i>
-                                Número p/ Contato
+                                <i class="fa fa-road"></i>
+                                Quilometragem
                             </div>
                         </th>
-                        <th>
-                            <div class="d-flex align-items-center">
-                                <i class="fa fa-calendar"></i>
-                                Data de Cadastro
+                        <th class="text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fa fa-list-check"></i>
+                                Cotações Realizadas
                             </div>
                         </th>
                         <th></th><!-- Botoes -->
-                        <th></th><!-- Link p/veiculos -->
+                        <th></th><!-- link p/ cotacoes -->
                     </tr>
                 </thead>
-                <tbody id="list">
+                <tbody>
                     <tr>
                         <td colspan="10">
                             <div class="table-cell-icon">
                                 <i class="fa fa-plus"></i>
-                                Cadastrar um segurado
+                                Cadastrar um veículo
+                                <a asp-controller="Veiculo" asp-action="Cadastrar" class="stretched-link"></a>
                             </div>
-                            <a href="/segurados/cadastrar.html" class="stretched-link"></a>
                         </td>
                     </tr>
                 </tbody>

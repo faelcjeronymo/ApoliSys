@@ -15,9 +15,9 @@
     --bs-dropdown-divider-margin-y: 0.375rem;
     --bs-dropdown-box-shadow: 0 7px 14px 0
     rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
-    --bs-dropdown-link-color: var(--bs-primary);
-    --bs-dropdown-link-hover-color: var(--bs-primary);
-    --bs-dropdown-link-hover-bg: var(--bs-primary-light);
+    --bs-dropdown-link-color: var(--bs-primary-dark);
+    --bs-dropdown-link-hover-color: var(--bs-primary-dark);
+    --bs-dropdown-link-hover-bg: rgba(var(--bs-primary-dark-rgb), .1);
     --bs-dropdown-link-active-color: #0d1f32;
     --bs-dropdown-link-active-bg: var(--bs-gray-100);
     --bs-dropdown-link-disabled-color: #a5abb3;
