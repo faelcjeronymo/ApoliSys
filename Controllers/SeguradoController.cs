@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApoliSys.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApoliSys.Controllers
@@ -19,5 +20,11 @@ namespace ApoliSys.Controllers
         {
             return View();
         }
+
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
     }
 }
