@@ -8,6 +8,7 @@
   "author": "João Henrique, Rafael Cardoso, Talina Cruz, Victor Hugo Laveso, Victor Fernando Martins",
   "license": "ISC",
   "dependencies": {
+    "@selectize/selectize": "^0.14.0",
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
     "jquery-mask-plugin": "^1.14.16"

@@ -22,8 +22,7 @@ namespace ApoliSys.Models
             NpgsqlConnection.GlobalTypeMapper.MapEnum<status_apolice>();
         }
 
-        public ApoliSysContext(DbContextOptions<ApoliSysContext> options)
-            : base(options)
+        public ApoliSysContext(DbContextOptions<ApoliSysContext> options) : base(options)
         {
         }
 

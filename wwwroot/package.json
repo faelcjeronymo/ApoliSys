@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "apolisys": "file:..",
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
     "jquery-mask-plugin": "^1.14.16"
