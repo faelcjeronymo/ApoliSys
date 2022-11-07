@@ -18,8 +18,10 @@
     </div>
     <div class="form-group">
         <label asp-for="Genero" class="form-label">Gênero</label>
-        <select asp-for="Genero" class="form-select">
-            option
+        <select asp-for="Genero">
+            <option value="@genero.feminino">Feminino</option>
+            <option value="@genero.masculino">Masculino</option>
+            <option value="@genero.outro">Outro</option>
         </select>
         <span asp-validation-for="Genero" class="text-danger"></span>
     </div>

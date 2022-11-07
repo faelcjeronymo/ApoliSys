@@ -8,6 +8,7 @@
     <title>@ViewData["Title"] - ApoliSys</title>
 
     <link rel="stylesheet" href="~/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/node_modules/selectize/selectize/dist/css/selectize.bootstrap5.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @* Font Awesome *@
     <script src="https://kit.fontawesome.com/5a992afea4.js" crossorigin="anonymous"></script>
@@ -189,9 +190,10 @@
             </main>
         </div>
     </div>
-    <script src="~/node_modules/jquery/dist/jquery.js"></script>
-    <script src="~/node_modules/jquery-mask-plugin/dist/jquery.mask.js"></script>
-    <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/node_modules/selectize/selectize/dist/js/selectize.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
