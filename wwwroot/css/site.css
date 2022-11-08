@@ -3,6 +3,7 @@
 /* Importing Components */
 @import url('components/buttons/buttons.css');
 @import url('components/dropdowns/dropdowns.css');
+@import url('components/form-step/form-step.css');
 @import url('components/header/header.css');
 @import url('components/icons/icons.css');
 @import url('components/inputs/inputs.css');

@@ -1,0 +1,32 @@
+.nav.form-step {
+    --bs-nav-tabs-border-width: 0;
+    --bs-nav-tabs-border-color: #e8ebee;
+    --bs-nav-tabs-border-radius: 0.375rem;
+    --bs-nav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
+    --bs-nav-tabs-link-active-color: var(--bs-white);
+    --bs-nav-tabs-link-active-bg: var(--bs-primary);
+    --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
+    --bs-nav-link-padding-x: 1rem;
+    --bs-nav-link-padding-y: 0.5rem;
+    --bs-nav-link-font-weight: 600;
+    --bs-nav-link-color: var(--bs-gray-600);
+    --bs-nav-link-hover-color: var(--bs-link-hover-color);
+    --bs-nav-link-disabled-color: #6c757d;
+    border-bottom: none;
+    justify-content: space-between;
+}
+
+.nav.form-step hr {
+    width: auto;
+    flex-grow: 1;
+    align-self: center;
+    margin: 1rem;
+    color: var(--bs-gray-600);
+}
+
+.nav-link.form-step-link {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: var(--bs-gray-300);
+}

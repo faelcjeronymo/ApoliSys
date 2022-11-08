@@ -3,7 +3,6 @@
 
 // Write your JavaScript code.
 $(window).on("load", function () {
-
     aplicar_mascaras_formatacao();
     iniciar_selectize();
 });
