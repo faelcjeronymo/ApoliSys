@@ -43,3 +43,7 @@
 .selectize-input {
     padding: .45rem .9rem;
 }
+
+.selectize-dropdown-emptyoptionlabel {
+    text-align: start;
+}
