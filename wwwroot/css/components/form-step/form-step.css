@@ -16,6 +16,11 @@
     justify-content: space-between;
 }
 
+.nav-item.form-step-item {
+    width: 3.5rem;
+    max-width: 3.5rem;
+}
+
 .nav.form-step hr {
     width: auto;
     flex-grow: 1;
