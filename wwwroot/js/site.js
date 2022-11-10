@@ -4,7 +4,6 @@
 // Write your JavaScript code.
 $(window).on("load", function () {
     aplicar_mascaras_formatacao();
-    iniciar_selectize();
     avancar_etapa_formulario();
 });
 
@@ -15,61 +14,48 @@ function aplicar_mascaras_formatacao() {
     $("input[name='Cep']").mask("00000-000");
 }
 
+//Etapas do formulario
 function avancar_etapa_formulario() {
-    $("form.step-form button").on("click", function () {
+    $("form").on("submit", function (e) {
+        e.preventDefault();
         let form = $("form.step-form")[0];
-
-        console.log(form);
-
-        //Validando Selects
-        $(".selectize-control").each(function(index, elem){
-            if ($(elem).find(".item").attr('data-value') == null) {
-                console.log("Teste");
-            }                
-        });
 
         if (!form.checkValidity()) {
             $(form).addClass("was-validated");
-            abrir_toast();
         }
 
+        $(".form-step-link").each((index, elem) => {
+            if ($(elem).hasClass("active")) {
+                $(elem).addClass("step-finished");
+
+                if ($(".form-step-link:not(.step-finished)").length > 0) {
+                    $(elem).removeClass("active")
+                }
+            }
+        });
+
+        $(".tab-pane").each((index, elem) => {
+            if ($(elem).hasClass("active")) {
+                $(elem).addClass("step-finished");
+
+                if ($(".tab-pane:not(.step-finished)").length > 0) {
+                    $(elem).removeClass("active show")
+                }
+
+            }
+        });
+
+        if ($(".form-step-link:not(.step-finished)").length > 0) {
+            $(".form-step-link:not(.step-finished)").addClass("active")
+        }
+
+        if ($(".tab-pane:not(.step-finished)").length > 0) {
+            $(".tab-pane:not(.step-finished)").addClass("show active")
+        }
     })
 }
 
-function abrir_toast(titulo = "Titulo", icone, conteudo, posicao) {
-
-    let toast = `
-    <div class="toast position-absolute top-0 start-50 translate-middle-x" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <i class="fa fa-exclamation-circle"></i>
-            <strong class="me-auto">Bootstrap</strong>
-            <small class="text-muted">11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-    `;
-
-    $(".card-body .container-fluid").append(toast);
-
-    $(".toast").each((index, elem) => {
-        $(elem).on("hidden.bs.toast", () => {
-            $(".toast").remove();
-        })
-        elem = new bootstrap.Toast(elem);
-        elem.show();
-    })
-}
-
-function iniciar_selectize() {
-    let selectize = $("select").selectize({
-        placeholder: "Selecione",
-        allowEmptyOption: true,
-    });
-
-    selectize.on("open", () => {
-        $(this).clear();
-    })
-}
+var $selectize = $("select").selectize({
+    placeholder: "Selecione",
+    allowEmptyOption: true,
+});

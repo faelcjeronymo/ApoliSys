@@ -14,11 +14,13 @@
     --bs-nav-link-disabled-color: #6c757d;
     border-bottom: none;
     justify-content: space-between;
+    margin-bottom: 1.25rem;
 }
 
 .nav-item.form-step-item {
     width: 3.5rem;
     max-width: 3.5rem;
+    position: relative;
 }
 
 .nav.form-step hr {
@@ -34,4 +36,16 @@
     height: 3.5rem;
     border-radius: 50%;
     background-color: var(--bs-gray-300);
+}
+
+.form-step-label {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--bs-gray-600);
+}
+
+.form-step-link.active ~ .form-step-label {
+    color: var(--bs-primary);
 }
