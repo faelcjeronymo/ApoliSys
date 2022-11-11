@@ -16,12 +16,13 @@ function aplicar_mascaras_formatacao() {
 
 //Etapas do formulario
 function avancar_etapa_formulario() {
-    $("form").on("submit", function (e) {
-        e.preventDefault();
+    $("form").one("submit", function (e) {
         let form = $("form.step-form")[0];
 
         if (!form.checkValidity()) {
+            e.stopPropagation();
             $(form).addClass("was-validated");
+            return false;
         }
 
         $(".form-step-link").each((index, elem) => {
@@ -51,6 +52,10 @@ function avancar_etapa_formulario() {
 
         if ($(".tab-pane:not(.step-finished)").length > 0) {
             $(".tab-pane:not(.step-finished)").addClass("show active")
+        }
+
+        if ($(".tab-pane").length == 0) {
+            $(this).trigger("submit");
         }
     })
 }
