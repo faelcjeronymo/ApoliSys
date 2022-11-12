@@ -1,15 +1,22 @@
 @model ApoliSys.Models.Pessoa
 
 @{
-    ViewData["PageTitle"] = "Cadastrar um Segurado";
+    ViewData["Title"] = "Cadastrar um Segurado";
 }
-<div class="row mt-5">
+
+<style>
+    .container-fluid {
+        align-self: center;
+    }
+</style>
+
+<div class="row">
     <div class="col-12 col-sm-auto mx-sm-auto">
         <h5 class="text-primary text-center">Cadastrar um Segurado</h5>
     </div>
 </div>
-<div class="row justify-content-md-center mb-5">
-    <div class="col-12 col-md-10 col-lg-8 col-xl-6 col-xxl-4">
+<div class="row justify-content-sm-center mb-5">
+    <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4">
         <ul class="nav nav-tabs form-step" id="myTab" role="tablist">
             <li class="nav-item form-step-item" role="presentation">
                 <button class="nav-link form-step-link active" id="step-one" data-bs-toggle="tab" data-bs-target="#step-one-pane" type="button" role="tab" aria-controls="step-one-pane" aria-selected="true">1</button>
@@ -28,65 +35,70 @@
         </div> *@
     </div>
 </div>
-<form id="form-cadastrar" asp-action="Cadastrar" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@using (Html.BeginForm("Cadastrar", "Segurado", FormMethod.Post, new { 
+        @id = "form-cadastrar", 
+        @class = "row gy-3 tab-content step-form needs-validation justify-content-md-center",
+        @novalidate = ""
+    })) 
+    {
+
     <div class="tab-pane show active fade" id="step-one-pane">
-        <div class="row gy-2 flex-md-column align-items-md-center">
-            <div class="col-sm-6 col-md-10 col-lg-8 col-xl-6 col-xxl-4 form-group">
+        <div class="row gy-2 flex-sm-column align-items-sm-center">
+            <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4 form-group">
                 <label asp-for="Nome" class="form-label">Nome<sup>*</sup></label>
                 <input form="form-cadastrar" asp-for="Nome" class="form-control" placeholder="Ex. Ana Maria da Silva" required/>
                 <span asp-validation-for="Nome" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-sm-6 col-md-10 col-lg-8 col-xl-6 col-xxl-4 form-group">
-                <label asp-for="Genero" class="form-label">Gênero<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="Genero" required>
+            <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4 form-group">
+                <label asp-for="genero" class="form-label">Gênero<sup>*</sup></label>
+                <select form="form-cadastrar" asp-for="genero" required>
                     <option value="" disabled selected>Selecione</option>
                     <option value="@genero.feminino">Feminino</option>
                     <option value="@genero.masculino">Masculino</option>
                     <option value="@genero.outro">Outro</option>
                 </select>
-                <span asp-validation-for="Genero" class="invalid-feedback">Campo obrigatório</span>
+                <span asp-validation-for="genero" class="invalid-feedback">Campo obrigatório</span>
             </div>
-            <div class="col-sm-6 col-md-10 col-lg-8 col-xl-6 col-xxl-4 form-group">
+            <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4 form-group">
                 <label asp-for="DataNascimento" class="form-label">Data de Nascimento<sup>*</sup></label>
                 <input form="form-cadastrar" asp-for="DataNascimento" type="date" class="form-control" required>
                 <span asp-validation-for="DataNascimento" class="invalid-feedback">Campo obrigatório</span>
             </div>
-            <div class="col-sm-6 col-md-10 col-lg-8 col-xl-6 col-xxl-4 form-group">
+            <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4 form-group">
                 <label asp-for="CpfCnpj" class="form-label">CPF/CNPJ<sup>*</sup></label>
                 <input form="form-cadastrar" asp-for="CpfCnpj" class="form-control" placeholder="Digite o CPF/CNPJ do Segurado" required/>
                 <span asp-validation-for="CpfCnpj" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-sm-6 col-md-10 col-lg-8 col-xl-6 col-xxl-4 form-group">
+            <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4 form-group">
                 <label asp-for="Cnh" class="form-label">CNH<sup>*</sup></label>
                 <input form="form-cadastrar" asp-for="Cnh" class="form-control" placeholder="Ex. 00123456789" required/>
                 <span asp-validation-for="Cnh" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-sm-6 col-md-10 col-lg-8 col-xl-6 col-xxl-4 form-group">
+            <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4 form-group">
                 <label asp-for="Celular" class="form-label">Número de Celular<sup>*</sup></label>
                 <input form="form-cadastrar" asp-for="Celular" class="form-control" placeholder="Ex. (12) 99345-6789" type="tel" required/>
                 <span asp-validation-for="Celular" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-sm-6 col-md-10 col-lg-8 col-xl-6 col-xxl-4 form-group">
+            <div class="col-sm-10 col-md-8 col-xl-6 col-xxl-4 form-group">
                 <label asp-for="Email" class="form-label">Endereço de E-mail</label>
                 <input form="form-cadastrar" asp-for="Email" class="form-control" placeholder="Ex. segurado@email.com"/>
                 <span asp-validation-for="Email" class="invalid-feedback">Campo Obrigatório</span>
             </div>
         </div>
     </div>
-    <div class="col-md-10 col-lg-8 col-xl-6 col-xxl-4 tab-pane fade" id="step-two-pane">
-        <div class="row gy-2">
-            <div class="col-sm-4 form-group">
+    <div class="col-md-8 col-xl-6 col-xxl-4 tab-pane fade" id="step-two-pane">
+        <div class="row gy-2 justify-content-sm-center">
+            <div class="col-sm-4 form-group flex-md-grow-1">
                 <label asp-for="Cep" class="form-label">CEP</label>
                 <input form="form-cadastrar" asp-for="Cep" class="form-control" placeholder="Ex. 12345-678"/>
                 <span asp-validation-for="Cep" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-8 col-sm-4 col-xxl-5 me-xxl-auto form-group">
+            <div class="col-8 col-sm-4 col-xxl-5 me-xxl-auto form-group flex-md-grow-1">
                 <label asp-for="Cidade" class="form-label">Cidade</label>
                 <input form="form-cadastrar" asp-for="Cidade" class="form-control" placeholder="Ex. Ribeirão Preto"/>
                 <span asp-validation-for="Cidade" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-4 col-sm-4 col-xxl-3 form-group">
+            <div class="col-4 col-sm-2 col-xxl-3 form-group flex-md-grow-1">
                 <label asp-for="Estado" class="form-label">UF</label>
                 <select form="form-cadastrar" asp-for="Estado">
                     <option value="0" selected disabled>UF</option>
@@ -120,22 +132,22 @@
                 </select>
                 <span asp-validation-for="Estado" class="invalid-feedback"></span>
             </div>
-            <div class="col-sm-6 col-lg-12 form-group">
+            <div class="col-sm-10 col-lg-12 form-group flex-md-grow-1">
                 <label asp-for="Bairro" class="form-label"></label>
                 <input form="form-cadastrar" asp-for="Bairro" class="form-control" placeholder="Ex. Campos Elísios"/>
                 <span asp-validation-for="Bairro" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-sm-6 col-lg-12 form-group">
+            <div class="col-sm-6 form-group flex-md-grow-1">
                 <label asp-for="Rua" class="form-label"></label>
                 <input form="form-cadastrar" asp-for="Rua" class="form-control" placeholder="Ex. Presidente Vargas"/>
                 <span asp-validation-for="Rua" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-sm-6 col-lg-12 form-group">
+            <div class="col-sm-4 form-group flex-md-grow-1">
                 <label asp-for="Numero" class="form-label"></label>
                 <input form="form-cadastrar" asp-for="Numero" class="form-control" placeholder="Ex. 123"/>
                 <span asp-validation-for="Numero" class="invalid-feedback">Campo Obrigatório</span>
             </div>
-            <div class="col-sm-6 col-lg-12 form-group">
+            <div class="col-sm-10 col-lg-12 form-group flex-md-grow-1">
                 <label asp-for="Complemento" class="form-label"></label>
                 <input form="form-cadastrar" asp-for="Complemento" class="form-control" placeholder="Ex. Ap. 3 - Bloco B"/>
                 <span asp-validation-for="Complemento" class="invalid-feedback">Campo Obrigatório</span>
@@ -143,11 +155,11 @@
         </div>
     </div>
     <div class="w-100 m-0"></div>
-    <div class="col-md-10 col-lg-8 col-xl-6 col-xxl-4">
+    <div class="col-sm-11 col-md-8 col-xl-6 col-xxl-4">
         <div class="row">
             <div class="col-12 col-sm-3 ms-sm-auto">
                 <button type="submit" class="btn btn-primary w-100" form="form-cadastrar">Avançar</button>
             </div>
         </div>
     </div>
-</form>
+}

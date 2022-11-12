@@ -57,3 +57,15 @@
 .selectize-dropdown-emptyoptionlabel {
     text-align: start;
 }
+
+.form-group {
+    position: relative;
+}
+
+.invalid-feedback {
+    position: absolute;
+    right: 0;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    width: auto;
+    transition: all 250ms linear;
+}

@@ -16,25 +16,28 @@ function aplicar_mascaras_formatacao() {
 
 //Etapas do formulario
 function avancar_etapa_formulario() {
-    $("form").one("submit", function (e) {
+    $("form").on("submit", function (e) {
         let form = $("form.step-form")[0];
 
+        //Verifica se todos os dados foram preenchidos, se não for, para a execução
         if (!form.checkValidity()) {
-            e.stopPropagation();
             $(form).addClass("was-validated");
             return false;
         }
 
+        //Verifica se existem botões de etapas para aplicar os estilos
         $(".form-step-link").each((index, elem) => {
             if ($(elem).hasClass("active")) {
                 $(elem).addClass("step-finished");
 
+                //Remove estilo de botão de etapa ja concluída
                 if ($(".form-step-link:not(.step-finished)").length > 0) {
                     $(elem).removeClass("active")
                 }
             }
         });
 
+        //Verifica
         $(".tab-pane").each((index, elem) => {
             if ($(elem).hasClass("active")) {
                 $(elem).addClass("step-finished");
@@ -51,10 +54,11 @@ function avancar_etapa_formulario() {
         }
 
         if ($(".tab-pane:not(.step-finished)").length > 0) {
+            e.preventDefault();
             $(".tab-pane:not(.step-finished)").addClass("show active")
         }
 
-        if ($(".tab-pane").length == 0) {
+        if ($(".tab-pane:not(.step-finished)").length == 0) {
             $(this).trigger("submit");
         }
     })

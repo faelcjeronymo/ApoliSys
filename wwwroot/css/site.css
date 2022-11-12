@@ -105,11 +105,12 @@ html, body {
     padding-right: .5rem!important;
     padding-left: 1.5rem!important;
     z-index: 1;
+    display: flex;
 }
 
-.main-content > .card > .card-body > .container-fluid {
+/* .main-content > .card > .card-body > .container-fluid {
     margin-bottom: 5rem;
-}
+} */
 
 .main-content > .card > .card-body::-webkit-scrollbar {
     width: 16px;

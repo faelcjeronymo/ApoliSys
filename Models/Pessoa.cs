@@ -14,7 +14,7 @@ namespace ApoliSys.Models
         public int Id { get; set; }
         public string Nome { get; set; } = null!;
         public string CpfCnpj { get; set; } = null!;
-        public genero Genero { get; set; }
+        public genero genero { get; set; }
         public string Cep { get; set; } = null!;
         public string Cidade { get; set; } = null!;
         public string Bairro { get; set; } = null!;
@@ -23,7 +23,7 @@ namespace ApoliSys.Models
         public string Complemento { get; set; } = null!;
         public string Celular { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public DateOnly DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
         public string Estado { get; set; } = null!;
         public string Cnh { get; set; } = null!;
 
