@@ -31,29 +31,28 @@ namespace ApoliSys.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(Pessoa pessoa)
+        public JsonResult Salvar(Pessoa pessoa, Segurado segurado)
         {
-            try
-            {
-                //Removendo mascaras de formatacao
-                pessoa.Cep = pessoa.Cep.Replace("-", "");
-                pessoa.CpfCnpj = pessoa.CpfCnpj.Replace(".", "").Replace("-", "");
-                pessoa.Celular = pessoa.Celular.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
 
-                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
-                ApoliSysContext _context = new ApoliSysContext();
-
-                _context.Pessoas.Add(pessoa);
-                _context.SaveChanges();
-            }
-            catch (Microsoft.EntityFrameworkCore.DbUpdateException e)
-            {
-                Debug.WriteLine(e.InnerException);
-                return View();
+            if (pessoa.validarDataNascimento() == false) {
+                return Json(new {
+                    successo = 0,
+                    mensagem = "Por favor, digite uma Data de Nascimento válida."
+                });
             }
 
-            return View();
+            if (pessoa.validarCpfCnpj() == false)
+            {
+                return Json(new {
+                    sucesso = 0,
+                    mensagem = "Por favor, digite um CPF/CNPJ Válido.",
+                });
+            }
+
+            return Json(new {
+                successo = 1,
+                mensagem = "Segurado Cadastrado!",
+            });
         }
 
     }

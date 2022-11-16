@@ -63,9 +63,15 @@
 }
 
 .invalid-feedback {
-    position: absolute;
-    right: 0;
-    padding-right: calc(var(--bs-gutter-x) * 0.5);
-    width: auto;
-    transition: all 250ms linear;
+    margin-top: 0;
+}
+
+.form-check .form-check-input, .form-check .form-check-label {
+    cursor: pointer;
+}
+
+.form-switch .form-check-input {
+    width: 2.1rem;
+    height: 1.1rem;
+    margin-right: .125rem;
 }

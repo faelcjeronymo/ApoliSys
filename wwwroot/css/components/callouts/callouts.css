@@ -1,0 +1,21 @@
+.callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    background-color: var(--bd-callout-bg, var(--bs-gray-100));
+    border-left: 0.25rem solid var(--bd-callout-border, var(--bs-gray-300));
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    word-break: break-all;
+}
+
+.callout i {
+    margin-right: .25rem;
+    font-size: 1.15rem;
+}
+
+.callout-primary {
+    --bd-callout-bg: var(--bs-light);
+    --bd-callout-border: rgba(var(--bs-primary-rgb), 1);
+}

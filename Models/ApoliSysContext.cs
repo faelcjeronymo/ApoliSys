@@ -20,6 +20,8 @@ namespace ApoliSys.Models
             NpgsqlConnection.GlobalTypeMapper.MapEnum<forma_pagamento>();
             NpgsqlConnection.GlobalTypeMapper.MapEnum<status_cotacao>();
             NpgsqlConnection.GlobalTypeMapper.MapEnum<status_apolice>();
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         public ApoliSysContext(DbContextOptions<ApoliSysContext> options) : base(options)
@@ -118,7 +120,8 @@ namespace ApoliSys.Models
             {
                 entity.ToTable("Pessoa");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Bairro)
                     .HasMaxLength(100)
@@ -149,7 +152,8 @@ namespace ApoliSys.Models
                     .HasMaxLength(14)
                     .HasColumnName("cpf_cnpj");
 
-                entity.Property(e => e.DataNascimento).HasColumnName("data_nascimento");
+                entity.Property(e => e.DataNascimento)
+                    .HasColumnName("data_nascimento");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
@@ -164,7 +168,11 @@ namespace ApoliSys.Models
                     .HasMaxLength(100)
                     .HasColumnName("nome");
 
-                entity.Property(e => e.Numero).HasColumnName("numero");
+                entity.Property(e => e.Genero)
+                    .HasColumnName("genero");
+
+                entity.Property(e => e.Numero)
+                    .HasColumnName("numero");
 
                 entity.Property(e => e.Rua)
                     .HasMaxLength(100)
@@ -175,13 +183,18 @@ namespace ApoliSys.Models
             {
                 entity.ToTable("Segurado");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id");
 
-                entity.Property(e => e.IdPessoa).HasColumnName("id_pessoa");
+                entity.Property(e => e.IdPessoa)
+                    .HasColumnName("id_pessoa");
 
                 entity.Property(e => e.Profissao)
                     .HasMaxLength(50)
                     .HasColumnName("profissao");
+                
+                entity.Property(e => e.FaixaSalarial)
+                    .HasColumnName("faixa_salarial");
 
                 entity.HasOne(d => d.IdPessoaNavigation)
                     .WithMany(p => p.Segurados)

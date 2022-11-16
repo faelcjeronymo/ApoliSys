@@ -38,6 +38,10 @@
     background-color: var(--bs-gray-300);
 }
 
+.nav-link:not(.active):hover.form-step-link:hover {
+    color: var(--bs-primary);
+}
+
 .form-step-label {
     position: absolute;
     text-align: center;
