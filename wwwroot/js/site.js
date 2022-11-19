@@ -106,9 +106,10 @@ function enviarFormulario (urlAcao) {
         contentType: false,
         success: (respostaReq) => {
             console.log(respostaReq);
+            exibir_notificacao();
         },
         error: (requisicao, status, erro) => {
-            console.log(erro);
+            console.log(requisicao);
         }
 
     });
@@ -154,6 +155,35 @@ function buscarEnderecoViaCep () {
             }
         })
     }
+}
+
+function exibir_notificacao(tipoNotificacao = null, mensagemNotificacao = null) {
+    let elementoToast = `
+    <div class="toast-container top-0 start-50 translate-middle-x">
+        <div class="toast text-bg-danger align-items-center border-0 mt-2" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">Teste</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        </div>
+    </div>
+    `;
+
+    $(".main-content .card .card-body .container-fluid").append(elementoToast);
+
+    let toastOptions = {
+        delay : 3000,
+    }
+
+    $(".toast").each(function (index, toastElem) {
+        let toastNotificacao = new bootstrap.Toast(toastElem, toastOptions);
+
+        toastNotificacao.show();
+
+        $(toastElem).on("hidden.bs.toast", function () {
+            $(this).parent().remove();
+        })
+    })
 }
 
 /**

@@ -43,6 +43,10 @@ namespace ApoliSys.Models
         }
 
         public bool validarCpfCnpj () {
+            if (CpfCnpj == null)
+            {
+                return false;
+            }
             //Removendo mascara
             CpfCnpj = CpfCnpj.Replace("-", "").Replace(".", "");
             string CpfCnpjValidado = "";
