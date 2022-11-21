@@ -50,6 +50,7 @@ function avancarEtapaFormulario() {
         //Verifica se todos os dados foram preenchidos, se não for, para a execução
         if (!form.checkValidity()) {
             $(form).addClass("was-validated");
+            return false;
         }
 
         //Verifica se existem botões de etapas para aplicar os estilos
@@ -93,6 +94,8 @@ function avancarEtapaFormulario() {
 }
 
 function enviarFormulario (urlAcao) {
+    carregandoBotao();
+
     let formulario = $("form")[0];
     let formularioValores = new FormData(formulario);
 
@@ -105,11 +108,10 @@ function enviarFormulario (urlAcao) {
         cache: false,
         contentType: false,
         success: (respostaReq) => {
-            console.log(respostaReq);
-            exibir_notificacao();
+            exibir_notificacao((respostaReq.sucesso == 0 ? "erro" : "sucesso"), respostaReq.mensagem);
         },
         error: (requisicao, status, erro) => {
-            console.log(requisicao);
+            console.log(requisicao + " " + status);
         }
 
     });
@@ -120,7 +122,11 @@ function buscarEnderecoViaCep () {
     let preencherEndereco = inputCep.data("preencherEndereco");
 
     if (preencherEndereco == true) {
-        //aO digitar O cep vai buscar informações em uma API
+        inputCep.on("blur", function () {
+            inputCep.removeClass("is-invalid");
+        })
+
+        //ao digitar o cep vai buscar informações em uma API
         inputCep.on("keyup", function () {
             /**
              * Recuperando Cep Sem máscara de formatacao
@@ -152,24 +158,121 @@ function buscarEnderecoViaCep () {
                         inputCep.addClass("is-invalid");
                     }
                 });
+            } else {
+                inputCep.addClass("is-invalid");
             }
         })
     }
 }
 
-function exibir_notificacao(tipoNotificacao = null, mensagemNotificacao = null) {
-    let elementoToast = `
-    <div class="toast-container top-0 start-50 translate-middle-x">
-        <div class="toast text-bg-danger align-items-center border-0 mt-2" role="alert">
-            <div class="d-flex">
-                <div class="toast-body">Teste</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
-            </div>
-        </div>
-    </div>
-    `;
+function carregandoBotao (seletorBotao = null) {
+    if (seletorBotao == null) {
+        seletorBotao = "button[type='submit']";
+    }
 
-    $(".main-content .card .card-body .container-fluid").append(elementoToast);
+    let elementoBotao = $(seletorBotao);
+
+    if (elementoBotao.find("span.texto-auxiliar").length == 1) {
+
+        elementoBotao.find("span.texto-auxiliar").css("visibility", "hidden")
+
+    } else {
+
+        let textoAnteriorBotao = elementoBotao.html();
+        elementoBotao.html("");
+        let textoAuxiliar = document.createElement("span");
+        textoAuxiliar.classList.add("texto-auxiliar");
+        textoAuxiliar.append(textoAnteriorBotao);
+        textoAuxiliar.style.visibility = "hidden";
+        elementoBotao.append(textoAuxiliar);
+    }
+
+    let spinner = document.createElement("span");
+    spinner.classList.add("spinner-border", "spinner-border-sm");
+    spinner.setAttribute("role", "status")
+
+    elementoBotao.append(spinner);
+
+    elementoBotao.attr("disabled", true);
+}
+
+function removerCarregando (seletorBotao = null) {
+    if (seletorBotao == null) {
+        seletorBotao = "button[type='submit']";
+    }
+
+    let elementoBotao = $(seletorBotao);
+    
+    elementoBotao.removeAttr("disabled");
+    elementoBotao.find(".spinner-border").remove();
+    elementoBotao.find(".texto-auxiliar").css("visibility", "visible");
+}
+
+function exibir_notificacao(tipoNotificacao, mensagemNotificacao) {
+    /**
+     * Variável para armazenar o nome
+     * da classe que mudará a cor de 
+     * fundo da notificação.
+     */
+    let corNotificacao = "";
+    /**
+     * Variavel para armazenar o nome
+     * da classe do icone de notificação.
+     */
+    let iconeNotificacao = "";
+
+    switch (tipoNotificacao) {
+        case "sucesso":
+            corNotificacao = "bg-primary";
+            iconeNotificacao = "fa-circle-check";
+            break;
+        case "erro":
+            corNotificacao = "bg-danger";
+            iconeNotificacao = "fa-circle-exclamation";
+            break;
+        default:
+            console.log("Coloque o tipo da notificação, irmão.");
+            return false;
+            break;
+    }
+
+    if (mensagemNotificacao == null) {
+        console.log("Coloque a mensagem da notificação, irmão.");
+        return false;
+    }
+
+    //Criando elemento Toast
+    let toastContainer = document.createElement("div");
+    let toastElement = document.createElement("div");
+    let toastElementContainer = document.createElement("div");
+    let toastIcon = document.createElement("i");
+    let toastElementBody = document.createElement("div");
+    let toastCloseButton = document.createElement("button");
+
+    //Aplicando estilos aos elementos
+    toastContainer.classList.add("toast-container", "top-0", "start-50", "translate-middle-x");
+
+    toastElement.classList.add("toast", corNotificacao, "align-items-center", "border-0", "mt-2", "text-white");
+    toastElement.setAttribute("role", "alert");
+
+    toastElementContainer.classList.add("d-flex", "align-items-center");
+
+    toastIcon.classList.add("fa", iconeNotificacao, "mx-auto", "fa-lg");
+
+    toastElementBody.classList.add("toast-body", "ps-0");
+    toastElementBody.append(mensagemNotificacao);
+
+    toastCloseButton.classList.add("btn-close", "btn-close-white", "me-2" , "ms-auto");
+    toastCloseButton.setAttribute("data-bs-dismiss", "toast");
+
+    //Contruindo hierarquia de elementos
+    toastElementContainer.append(toastIcon, toastElementBody, toastCloseButton)
+
+    toastElement.append(toastElementContainer);
+    
+    toastContainer.append(toastElement)
+
+    $(".main-content .card .card-body .container-fluid").append(toastContainer);
 
     let toastOptions = {
         delay : 3000,

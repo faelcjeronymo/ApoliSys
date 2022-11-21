@@ -32,7 +32,10 @@ namespace ApoliSys.Models
                 //Removendo mascaras de formatacao
                 pessoa.CpfCnpj = pessoa.CpfCnpj.Replace("-", "").Replace(".", "");
                 pessoa.Celular = pessoa.Celular.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
-                pessoa.Cep = pessoa.Cep.Replace("-", "");
+                
+                if (pessoa.Cep != null) {
+                    pessoa.Cep = pessoa.Cep.Replace("-", "");
+                }
 
                 IdPessoaNavigation = pessoa;
 
@@ -42,9 +45,9 @@ namespace ApoliSys.Models
                 _context.SaveChanges();
 
             }
-            catch (DbUpdateException e)
+            catch (Exception e)
             {
-                Debug.WriteLine(e.InnerException);
+                Debug.WriteLine(e.StackTrace);
                 return false;
                 throw;
             }

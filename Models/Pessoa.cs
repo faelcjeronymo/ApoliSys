@@ -23,7 +23,7 @@ namespace ApoliSys.Models
         public int Numero { get; set; }
         public string Complemento { get; set; }
         public string Celular { get; set; } = null!;
-        public string Email { get; set; } = null!;
+        public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Estado { get; set; }
         public string Cnh { get; set; }
@@ -48,11 +48,16 @@ namespace ApoliSys.Models
                 return false;
             }
             //Removendo mascara
-            CpfCnpj = CpfCnpj.Replace("-", "").Replace(".", "");
+            string CpfCnpjSemMascara = CpfCnpj.Replace("-", "").Replace(".", "");
+            
+            if (CpfCnpjSemMascara.Length < 11) {
+                return false;
+            }
+
             string CpfCnpjValidado = "";
 
             //Verificando primeiro digito verificador
-            string noveDigitos = CpfCnpj.Substring(0, 9);
+            string noveDigitos = CpfCnpjSemMascara.Substring(0, 9);
             char[] vetorDigitos = noveDigitos.ToCharArray();
             int somaMultiplicacaoDigitos = 0;
             int multiplicadorDigitos = 10;
@@ -103,8 +108,18 @@ namespace ApoliSys.Models
             CpfCnpjValidado = CpfCnpjValidado + segundoDigitoVerificador.ToString();
 
             //Verificando se o CPF digitado é válido
-            if (CpfCnpj != CpfCnpjValidado)
+            if (CpfCnpjSemMascara != CpfCnpjValidado)
             {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool validarCep () {
+            string CepSemMascara = Cep.Replace("-", "");
+
+            if (CepSemMascara.Length != 8) {
                 return false;
             }
 

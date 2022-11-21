@@ -75,3 +75,11 @@
     height: 1.1rem;
     margin-right: .125rem;
 }
+
+.was-validated .form-check-input:valid, .form-check-input.is-valid {
+    border-color: rgba(0, 0, 0, .25);
+}
+
+.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+    color: inherit;
+}

@@ -49,6 +49,22 @@ namespace ApoliSys.Controllers
                 });
             }
 
+            if (pessoa.Cep != null) {
+                if (pessoa.validarCep() == false) {
+                        return Json(new {
+                            sucesso = 0,
+                            mensagem = "Por favor, digite um CEP Válido.",
+                        });
+                }
+            }
+
+            if (segurado.Cadastrar(pessoa) == false) {
+                return Json(new {
+                    sucesso = 0,
+                    mensagem = "Erro ao cadastrar o segurado.",
+                });
+            }
+
             return Json(new {
                 successo = 1,
                 mensagem = "Segurado Cadastrado!",
