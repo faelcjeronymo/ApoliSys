@@ -109,6 +109,7 @@ function enviarFormulario (urlAcao) {
         contentType: false,
         success: (respostaReq) => {
             exibir_notificacao((respostaReq.sucesso == 0 ? "erro" : "sucesso"), respostaReq.mensagem);
+            removerCarregandoBotao();
         },
         error: (requisicao, status, erro) => {
             console.log(requisicao + " " + status);
@@ -196,7 +197,7 @@ function carregandoBotao (seletorBotao = null) {
     elementoBotao.attr("disabled", true);
 }
 
-function removerCarregando (seletorBotao = null) {
+function removerCarregandoBotao (seletorBotao = null) {
     if (seletorBotao == null) {
         seletorBotao = "button[type='submit']";
     }

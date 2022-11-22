@@ -103,12 +103,12 @@ th i {
     pointer-events: all;
 }
 
-.table-cell-buttons button {
+.table-cell-buttons button, .table-cell-buttons a {
     margin-right: .5rem;
     z-index: 2;
 }
 
-.table-cell-buttons button:disabled {
+.table-cell-buttons button:disabled, .table-cell-buttons a.disabled {
     border: none;
 }
 

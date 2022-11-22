@@ -1,4 +1,4 @@
-@model ApoliSys.ViewModels.SeguradoViewModel;
+@model IEnumerable<ApoliSys.Models.Segurado>
 
 @{
     ViewData["Title"] = "Segurados";
@@ -37,7 +37,7 @@
                         <th>
                             <div class="d-flex align-items-center">
                                 <i class="fa fa-calendar"></i>
-                                Data de Cadastro
+                                Faixa Salarial
                             </div>
                         </th>
                         <th></th><!-- Botoes -->
@@ -54,6 +54,42 @@
                             <a href="~/Segurado/Cadastrar" class="stretched-link"></a>
                         </td>
                     </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdPessoaNavigation.Nome)
+                            </td>
+                            <td>
+                                @string.Format(@"{0:000\.000\.000\-00}", Convert.ToUInt64(item.IdPessoaNavigation.CpfCnpj))
+                            </td>
+                            <td>
+                                @item.IdPessoaNavigation.DataNascimento.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @string.Format(@"{0:(00) 00000-0000}", Convert.ToUInt64(item.IdPessoaNavigation.Celular))
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FaixaSalarial)
+                            </td>
+                            <td class="table-cell-buttons">
+                                <div class="d-flex justify-content-end">
+                                    <a href="~/Segurado/Modificar/@item.Id" class="btn btn-table">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                    <button class="btn btn-table">
+                                        <i class="fa fa-info-circle"></i>
+                                    </button>
+                                    <button class="btn btn-table remove">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td colspan="0">
+                                <a class="stretched-link" href="/veiculos/"></a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

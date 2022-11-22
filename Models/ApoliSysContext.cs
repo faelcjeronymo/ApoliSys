@@ -125,7 +125,8 @@ namespace ApoliSys.Models
 
                 entity.Property(e => e.Bairro)
                     .HasMaxLength(100)
-                    .HasColumnName("bairro");
+                    .HasColumnName("bairro")
+                    .IsRequired(false);
 
                 entity.Property(e => e.Celular)
                     .HasMaxLength(11)
@@ -133,15 +134,18 @@ namespace ApoliSys.Models
 
                 entity.Property(e => e.Cep)
                     .HasMaxLength(8)
-                    .HasColumnName("cep");
+                    .HasColumnName("cep")
+                    .IsRequired(false);
 
                 entity.Property(e => e.Cidade)
                     .HasMaxLength(100)
-                    .HasColumnName("cidade");
+                    .HasColumnName("cidade")
+                    .IsRequired(false);
 
                 entity.Property(e => e.Cnh)
                     .HasMaxLength(11)
-                    .HasColumnName("cnh");
+                    .HasColumnName("cnh")
+                    .IsRequired(false);
 
                 entity.Property(e => e.Complemento)
                     .HasMaxLength(50)
@@ -157,12 +161,14 @@ namespace ApoliSys.Models
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
-                    .HasColumnName("email");
+                    .HasColumnName("email")
+                    .IsRequired(false);
 
                 entity.Property(e => e.Estado)
                     .HasMaxLength(2)
                     .HasColumnName("estado")
-                    .IsFixedLength();
+                    .IsFixedLength()
+                    .IsRequired(false);
 
                 entity.Property(e => e.Nome)
                     .HasMaxLength(100)
@@ -176,7 +182,8 @@ namespace ApoliSys.Models
 
                 entity.Property(e => e.Rua)
                     .HasMaxLength(100)
-                    .HasColumnName("rua");
+                    .HasColumnName("rua")
+                    .IsRequired(false);
             });
 
             modelBuilder.Entity<Segurado>(entity =>

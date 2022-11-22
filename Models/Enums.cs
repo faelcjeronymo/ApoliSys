@@ -20,7 +20,7 @@ namespace ApoliSys.Models
         tres_mil_quatro_mill,
         [Display(Name = "R$ 4000,00 - R$ 5000,00")]
         quatro_mill_cinco_mill,
-        [Display(Name = "R$ 5000,00 +")]
+        [Display(Name = "R$ 5000,00+")]
         cinco_mil_mais
     }
 

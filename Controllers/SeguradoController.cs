@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using ApoliSys.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApoliSys.Controllers
 {
     public class SeguradoController : Controller
     {
         private readonly ILogger<SeguradoController> _logger;
+        private ApoliSysContext _context = new ApoliSysContext();
 
         public SeguradoController(ILogger<SeguradoController> logger)
         {
@@ -22,7 +24,8 @@ namespace ApoliSys.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var Segurados = _context.Segurados.Include(s => s.IdPessoaNavigation);
+            return View(Segurados.ToList());
         }
 
         public IActionResult Cadastrar()
@@ -36,7 +39,7 @@ namespace ApoliSys.Controllers
 
             if (pessoa.validarDataNascimento() == false) {
                 return Json(new {
-                    successo = 0,
+                    sucesso = 0,
                     mensagem = "Por favor, digite uma Data de Nascimento válida."
                 });
             }
@@ -71,5 +74,18 @@ namespace ApoliSys.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("Segurado/Modificar/{idSegurado:int}")]
+        public IActionResult Modificar(int idSegurado) {
+
+            _context.Segurados.Include(s => s.IdPessoaNavigation);
+            var segurado = _context.Segurados.Find(idSegurado);
+
+            if (segurado == null) {
+                return NotFound();
+            }
+
+            return View(segurado);
+        }
     }
 }
