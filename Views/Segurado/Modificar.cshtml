@@ -29,12 +29,12 @@
         </div> *@
     </div>
 </div>
-<form id="form-cadastrar" action="/Segurado/Salvar" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-cadastrar" action="/Segurado/SalvarModificar" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
     <div class="col-md-8 col-xl-6 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="IdPessoaNavigation.Nome" class="form-label">Nome<sup>*</sup></label>
-                @Html.EditorFor(model => model.IdPessoaNavigation.Nome)
+                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Nome" class="form-control" placeholder="Ex. Ana Maria da Silva" required/>
                 <span asp-validation-for="IdPessoaNavigation.Nome" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">

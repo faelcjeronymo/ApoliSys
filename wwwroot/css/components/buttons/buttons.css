@@ -4,7 +4,6 @@
     --bs-btn-font-weight: var(--bs-body-font-weight);
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
 }
 
@@ -23,6 +22,7 @@
     --bs-btn-disabled-color: rgba(255, 255, 255, .9);
     --bs-btn-disabled-bg: rgba(var(--bs-primary-rgb), .9);
     --bs-btn-disabled-border-color: rgba(var(--bs-primary-rgb), .0);
+    justify-content: center;
 }
 
 .btn-table {

@@ -34,7 +34,7 @@ namespace ApoliSys.Controllers
         }
 
         [HttpPost]
-        public JsonResult Salvar(Pessoa pessoa, Segurado segurado)
+        public JsonResult SalvarCadastrar(Pessoa pessoa, Segurado segurado)
         {
 
             if (pessoa.validarDataNascimento() == false) {
@@ -75,17 +75,59 @@ namespace ApoliSys.Controllers
         }
 
         [HttpGet]
-        [Route("Segurado/Modificar/{idSegurado:int}")]
-        public IActionResult Modificar(int idSegurado) {
+        [Route("Segurado/Modificar/{id:int}")]
+        public IActionResult Modificar(int id) {
 
-            _context.Segurados.Include(s => s.IdPessoaNavigation);
-            var segurado = _context.Segurados.Find(idSegurado);
+            var segurado = _context.Segurados
+            .Include(s => s.IdPessoaNavigation)
+            .FirstOrDefault(m => m.Id == id);
 
             if (segurado == null) {
                 return NotFound();
             }
 
             return View(segurado);
+        }
+
+        [HttpPut]
+        public JsonResult SalvarModificar(Pessoa pessoa, Segurado segurado)
+        {
+
+            if (pessoa.validarDataNascimento() == false) {
+                return Json(new {
+                    sucesso = 0,
+                    mensagem = "Por favor, digite uma Data de Nascimento válida."
+                });
+            }
+
+            if (pessoa.validarCpfCnpj() == false)
+            {
+                return Json(new {
+                    sucesso = 0,
+                    mensagem = "Por favor, digite um CPF/CNPJ Válido.",
+                });
+            }
+
+            if (pessoa.Cep != null) {
+                if (pessoa.validarCep() == false) {
+                        return Json(new {
+                            sucesso = 0,
+                            mensagem = "Por favor, digite um CEP Válido.",
+                        });
+                }
+            }
+
+            if (segurado.Cadastrar(pessoa) == false) {
+                return Json(new {
+                    sucesso = 0,
+                    mensagem = "Erro ao cadastrar o segurado.",
+                });
+            }
+
+            return Json(new {
+                successo = 1,
+                mensagem = "Segurado Modificado!",
+            });
         }
     }
 }
