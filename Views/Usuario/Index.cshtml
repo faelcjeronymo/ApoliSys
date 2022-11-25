@@ -1,15 +1,108 @@
-
 @{
-    Layout = null;
+    ViewData["Title"] = "Usuários";
 }
 
-<!DOCTYPE html>
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-user"></i>
+                                Nome
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-id-card"></i>
+                                CPF
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-baby"></i>
+                                Data de Nascimento
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-square-phone"></i>
+                                Número p/ Contato
+                            </div>
+                        </th>
+                        <th></th><!-- Botoes -->
+                    </tr>
+                </thead>
+                <tbody id="list">
+                    <tr>
+                        <td colspan="10">
+                            <div class="table-cell-icon">
+                                <i class="fa fa-plus"></i>
+                                Cadastrar um usuário
+                            </div>
+                            <a href="~/Usuario/Cadastrar" class="stretched-link"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Rafael Cardoso Jeronymo
+                        </td>
+                        <td>
+                            938.786.270-41
+                        </td>
+                        <td>
+                            02/10/2002
+                        </td>
+                        <td>
+                            (16) 99304-9985
+                        </td>
+                        <td class="table-cell-buttons">
+                            <div class="d-flex justify-content-end">
+                                <a href="" class="btn btn-table">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                                <a href="" class="btn btn-table">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                                <button class="btn btn-table remove">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            João Henrique B. do Carmo
+                        </td>
+                        <td>
+                            592.337.050-64
+                        </td>
+                        <td>
+                            03/11/2001
+                        </td>
+                        <td>
+                            (16) 98137-6934
+                        </td>
+                        <td class="table-cell-buttons">
+                            <div class="d-flex justify-content-end">
+                                <a href="" class="btn btn-table">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                                <a href="" class="btn btn-table">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                                <button class="btn btn-table remove">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-</body>
-</html>
+<script src="js/Usuario/Index.js" defer></script>

@@ -93,6 +93,8 @@ namespace ApoliSys.Controllers
         public JsonResult SalvarModificar(Pessoa pessoa, Segurado segurado)
         {
 
+            var data = _context.Segurados.FirstOrDefault(s => s.Id == segurado.Id);
+
             if (pessoa.validarDataNascimento() == false) {
                 return Json(new {
                     sucesso = 0,
@@ -117,17 +119,24 @@ namespace ApoliSys.Controllers
                 }
             }
 
-            if (segurado.Cadastrar(pessoa) == false) {
-                return Json(new {
-                    sucesso = 0,
-                    mensagem = "Erro ao cadastrar o segurado.",
-                });
-            }
-
             return Json(new {
                 successo = 1,
                 mensagem = "Segurado Modificado!",
             });
+        }
+
+        [HttpGet]
+        [Route("Segurado/{id:int}")]
+        public IActionResult Informacoes (int id) {
+            var segurado = _context.Segurados
+            .Include(s => s.IdPessoaNavigation)
+            .FirstOrDefault(m => m.Id == id);
+
+            if (segurado == null) {
+                return NotFound();
+            }
+
+            return View(segurado);
         }
     }
 }

@@ -19,11 +19,19 @@ function aplicarMascarasFormatacao() {
     let inputCnh = $("input[name*='Cnh']");
     let inputCelular = $("input[name*='Celular']");
     let inputCep = $("input[name*='Cep']");
+    let inputFipe = $("input[name*='CodigoFipe']");
+    let inputPlaca = $("input[name*='Placa']");
+    let inputKm = $("input[name*='Km']");
+    let inputValor = $("input[name*='Valor']");
     
     inputCpfCnpj.mask("000.000.000-00");
     inputCnh.mask("00000000000");
     inputCelular.mask("(00) 00000-0000");
     inputCep.mask("00000-000");
+    inputFipe.mask("00000-00");
+    inputPlaca.mask("AAA-0000");
+    inputKm.mask("000.000.000.000.000");
+    inputValor.mask("000.000.000.000.000,00", {reverse: true});
 }
 
 /**
@@ -41,6 +49,7 @@ function avancarEtapaFormulario() {
          * formulários.
          */
         let urlAcao = $(this).attr("action");
+        let metodoAcao = $(this).attr("method");
 
         if (urlAcao == "") {
             console.log("Coloque o Atributo Action no Formulário");
@@ -88,12 +97,12 @@ function avancarEtapaFormulario() {
         }
 
         if ($(".tab-pane:not(.step-finished)").length == 0) {
-            enviarFormulario(urlAcao);
+            enviarFormulario(urlAcao, metodoAcao);
         }
     })
 }
 
-function enviarFormulario (urlAcao) {
+function enviarFormulario (urlAcao, metodoAcao) {
     carregandoBotao();
 
     let formulario = $("form")[0];
@@ -102,7 +111,7 @@ function enviarFormulario (urlAcao) {
     //Enviando requisição
     $.ajax({
         url: urlAcao,
-        type: "POST",
+        type: metodoAcao,
         data: formularioValores,
         processData: false,
         cache: false,

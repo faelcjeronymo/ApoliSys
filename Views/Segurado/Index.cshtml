@@ -77,10 +77,10 @@
                                     <a href="~/Segurado/Modificar/@item.Id" class="btn btn-table">
                                         <i class="fa fa-pen"></i>
                                     </a>
-                                    <button class="btn btn-table">
+                                    <a href="~/Segurado/@item.Id" class="btn btn-table">
                                         <i class="fa fa-info-circle"></i>
-                                    </button>
-                                    <button class="btn btn-table remove">
+                                    </a>
+                                    <button class="btn btn-table remove" data-id-segurado="@item.Id">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -95,3 +95,5 @@
         </div>
     </div>
 </div>
+
+<script src="js/Segurado/Index.js" defer></script>

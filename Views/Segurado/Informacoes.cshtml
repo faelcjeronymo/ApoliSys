@@ -1,0 +1,75 @@
+@model ApoliSys.Models.Segurado;
+
+@{
+    ViewData["Title"] = "Informações do Segurado";
+}
+<div class="row h-100">
+    <div class="col-12 col-sm-8 col-md-6 col-xl-4 col-xxl-3 m-auto">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header px-3 pb-1">
+                <h2 class="card-title h5 text-primary-dark m-0 p-2 px-0 d-inline text-decoration-underline">@Model.IdPessoaNavigation.Nome</h2>    
+            </div>
+            <div class="card-body">
+                <h3 class="h6 text-primary fw-semibold mb-3">Informações Pessoais</h3>
+                <ul class="list-unstyled">
+                    <li class="py-2">
+                        <i class="fa fa-user text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Model.IdPessoaNavigation.Nome</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-mars-and-venus text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Html.DisplayFor(model => Model.IdPessoaNavigation.Genero)</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-cake text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Model.IdPessoaNavigation.DataNascimento.ToString("dd/MM/yyyy")</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-id-card text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@string.Format(@"{0:000\.000\.000\-00}", Convert.ToUInt64(Model.IdPessoaNavigation.CpfCnpj))</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-mobile-button text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@string.Format(@"{0:(00) 00000-0000}", Convert.ToUInt64(Model.IdPessoaNavigation.Celular))</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-money-bills text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Html.DisplayFor(model => Model.FaixaSalarial)</span>
+                    </li>
+                </ul>
+                <h3 class="h6 text-primary fw-semibold">Endereço</h3>
+                <ul class="list-unstyled">
+                    <li class="py-2">
+                        <i class="fa fa-envelope text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@string.Format(@"{0:00000-000}", Convert.ToUInt64(Model.IdPessoaNavigation.Cep))</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-city text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Model.IdPessoaNavigation.Cidade - @Model.IdPessoaNavigation.Estado</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-location-dot text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Model.IdPessoaNavigation.Bairro</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-signs-post text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Model.IdPessoaNavigation.Rua</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <i class="fa fa-map text-primary fs-5 align-baseline fa-fw"></i>
+                        <span class="align-top">@Model.IdPessoaNavigation.Complemento</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

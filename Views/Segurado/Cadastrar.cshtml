@@ -22,14 +22,9 @@
                 <div class="form-step-label">Endereço</div>
             </li>
         </ul>
-        @* <div class="form-step-indicator">
-            <span class="form-step-number">1</span>
-            <span class="form-step-separator"></span>
-            <span class="form-step-number">2</span>
-        </div> *@
     </div>
 </div>
-<form id="form-cadastrar" action="/Segurado/SalvarCadastrar" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-cadastrar" action="/Segurado/SalvarCadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
     <div class="col-md-8 col-xl-6 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-10 col-md-12 form-group">
@@ -157,7 +152,7 @@
     <div class="col-sm-11 col-md-8 col-xl-6 col-xxl-4">
         <div class="row">
             <div class="col-12 col-sm-3 ms-sm-auto">
-                <button type="submit" class="btn btn-primary w-100" form="form-cadastrar">Avançar</button>
+                <button type="submit" class="btn btn-primary w-100" form="form-cadastrar">Cadastrar</button>
             </div>
         </div>
     </div>

@@ -92,6 +92,9 @@ namespace ApoliSys.Models
                     .WithMany(p => p.Apolices)
                     .HasForeignKey(d => d.IdCotacao)
                     .HasConstraintName("fk_id_cotacao");
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status");
             });
 
             modelBuilder.Entity<Cotacao>(entity =>
@@ -114,6 +117,15 @@ namespace ApoliSys.Models
                     .WithMany(p => p.Cotacaos)
                     .HasForeignKey(d => d.IdVeiculo)
                     .HasConstraintName("fk_id_veiculo");
+
+                entity.Property(e => e.FormaPagamento)
+                    .HasColumnName("forma_pagamento");
+
+                entity.Property(e => e.PlanoSeguro)
+                    .HasColumnName("plano_seguro");
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status");
             });
 
             modelBuilder.Entity<Pessoa>(entity =>
@@ -232,9 +244,11 @@ namespace ApoliSys.Models
             {
                 entity.ToTable("Veiculo");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id");
 
-                entity.Property(e => e.Ano).HasColumnName("ano");
+                entity.Property(e => e.Ano)
+                    .HasColumnName("ano");
 
                 entity.Property(e => e.CodigoFipe)
                     .HasMaxLength(7)
@@ -269,6 +283,15 @@ namespace ApoliSys.Models
                     .WithMany(p => p.Veiculos)
                     .HasForeignKey(d => d.IdSegurado)
                     .HasConstraintName("fk_id_segurado");
+
+                entity.Property(e => e.Categoria)
+                    .HasColumnName("categoria");
+
+                entity.Property(e => e.Combustivel)
+                    .HasColumnName("combustivel");
+
+                entity.Property(e => e.Marca)
+                    .HasColumnName("marca");
             });
 
             OnModelCreatingPartial(modelBuilder);

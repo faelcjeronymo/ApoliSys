@@ -1,0 +1,102 @@
+@model ApoliSys.Models.Veiculo;
+
+@{
+    ViewData["Title"] = "Informações do Veículo";
+}
+<div class="row h-100">
+    <div class="col-12 col-sm-8 col-md-6 col-xl-4 col-xxl-3 m-auto">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header px-3 pb-1">
+                <h2 class="card-title h5 text-primary-dark m-0 p-2 px-0 d-inline text-decoration-underline">@Model.Modelo</h2>    
+            </div>
+            <div class="card-body">
+                <h3 class="h6 text-primary fw-semibold mb-3">Informações do veículo</h3>
+                <ul class="list-unstyled">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-hashtag text-primary fs-5 align-baseline fa-fw"></i>
+                            Código Fipe:
+                        </span>
+                        <span class="align-baseline">@string.Format(@"{0:00000\-00}", Convert.ToUInt64(Model.CodigoFipe))</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-car-side text-primary fs-5 align-baseline fa-fw"></i>
+                            Modelo:
+                        </span>
+                        <span class="align-top">@Html.DisplayFor(model => Model.Marca) - @Model.Modelo, @Model.Ano</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-car-side fs-5 text-primary position-relative fa-fw">
+                                <i class="fa fa-info-circle fa-xs position-absolute text-primary-dark" style="right: -4px;"></i>
+                            </i>
+                            Categoria:
+                        </span>
+                        <span class="align-top">@Html.DisplayFor(model => Model.Categoria)</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-car-side fs-5 text-primary position-relative">
+                                <i class="fa fa-hashtag fa-xs position-absolute text-primary-dark" style="right: -4px;"></i>
+                            </i>
+                            Placa:
+                        </span>
+                        <span class="align-top">@Model.Placa</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-car-side fs-5 text-primary position-relative">
+                                <i class="fa fa-id-card fa-xs position-absolute text-primary-dark" style="right: -4px;"></i>
+                            </i>
+                            Renavam:
+                        </span>
+                        <span class="align-top">@Model.Renavam</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-road fs-5 text-primary position-relative">
+                                <i class="fa fa-car fa-xs text-primary-dark position-absolute top-50 start-50 translate-middle"></i>
+                            </i>
+                            Zero Km:
+                        </span>
+                        <span class="align-top">@(Model.ZeroKm == true ? "Sim" : "Não")</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-road fs-5 text-primary position-relative">
+                                <i class="fa fa-info-circle fa-xs position-absolute text-primary-dark" style="right: -4px;"></i>
+                            </i>
+                            Km Rodados:
+                        </span>
+                        <span class="align-top">@Model.Km</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-gas-pump text-primary fs-5 align-baseline fa-fw"></i>
+                            Combustível:
+                        </span>
+                        <span class="align-top">@Html.DisplayFor(model => Model.Combustivel)</span>
+                    </li>
+                    <hr class="my-1 mx-2 text-dark text-opacity-25">
+                    <li class="py-2">
+                        <span class="text-primary">
+                            <i class="fa fa-car-side fs-5 text-primary position-relative">
+                                <i class="fa fa-circle-question fa-xs position-absolute text-primary-dark" style="right: -4px;"></i>
+                            </i>
+                            Utilização:
+                        </span>
+                        <span class="align-top">@Model.Utilizacao</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
