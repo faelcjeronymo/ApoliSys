@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace ApoliSys.Models
 {
@@ -26,5 +28,36 @@ namespace ApoliSys.Models
 
         public virtual Segurado IdSeguradoNavigation { get; set; } = null!;
         public virtual ICollection<Cotacao> Cotacaos { get; set; }
+
+        public bool Cadastrar() {
+            try
+            {
+                ApoliSysContext _context = new ApoliSysContext();
+
+                Debug.WriteLine(Km.ToString());
+
+                throw new Exception("Teste");
+
+                CodigoFipe = CodigoFipe.Replace("-", "");
+
+                TextInfo cultInfo = new CultureInfo("pt-BR", false).TextInfo;
+
+                Modelo = cultInfo.ToTitleCase(Modelo);
+
+                Placa = Placa.Replace("-", "");
+
+                _context.Add(this);
+
+                _context.SaveChanges();
+            }
+            catch (System.Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+
+            return true;
+        }
     }
 }

@@ -64,7 +64,7 @@ namespace ApoliSys.Controllers
             if (segurado.Cadastrar(pessoa) == false) {
                 return Json(new {
                     sucesso = 0,
-                    mensagem = "Erro ao cadastrar o segurado.",
+                    mensagem = "Algo deu errado ao cadastrar o Segurado.",
                 });
             }
 

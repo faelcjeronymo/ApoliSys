@@ -9,7 +9,8 @@
         <h5 class="text-primary text-center">Cadastrar uma Cotação</h5>
     </div>
 </div>
-<form id="form-cadastrar" action="/Cotacao/SalvarCadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-cadastrar" action="/Cotacao/Cadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+    <input type="hidden" asp-for="IdVeiculo" value="@ViewBag.IdVeiculo">
     <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-5 col-md-6 form-group">

@@ -9,7 +9,8 @@
         <h5 class="text-primary text-center">Cadastrar um Veículo</h5>
     </div>
 </div>
-<form id="form-cadastrar" action="/Veiculo/SalvarCadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-cadastrar" action="/Veiculo/Cadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+    <input type="hidden" asp-for="IdSegurado" value="@ViewBag.IdSegurado">
     <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-5 col-md-6 form-group">
@@ -24,7 +25,7 @@
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Ano" class="form-label">Ano<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Ano" class="form-control" placeholder="Ex. 1996" type="number" maxlength="4" required value=""/>
+                <input form="form-cadastrar" asp-for="Ano" class="form-control" placeholder="Ex. 1996" type="number" max="2099" required value=""/>
                 <span asp-validation-for="Ano" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
@@ -62,7 +63,7 @@
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Km" class="form-label">Quilometragem<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Km" class="form-control" placeholder="Ex. 138.000" type="number" required value="">
+                <input form="form-cadastrar" asp-for="Km" class="form-control" placeholder="Ex. 138.000" type="text" required value="" asp-format="{000.000.000.000}">
                 <span asp-validation-for="Km" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">

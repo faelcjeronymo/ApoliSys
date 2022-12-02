@@ -1,3 +1,5 @@
+@model IEnumerable<ApoliSys.Models.Apolice>
+
 @{
     ViewData["Title"] = "Apólices";
 }
@@ -42,10 +44,53 @@
                                 <i class="fa fa-plus"></i>
                                 Emitir uma Apólice
                             </div>
-                            <a href="/apolices/emitir.html" class="stretched-link"></a>
+                            <a href="~/Cotacao/@ViewBag.IdCotacao/Apolice/Cadastrar" class="stretched-link"></a>
                         </td>
                     </tr>
-                    <tr class=""><!-- Aprovada -->
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="apolice-numero">
+                                <div class="avatar avatar-circle avatar-xs">
+                                    <i class="fa fa-file-alt align-middle"></i>
+                                </div>
+                                <span>@item.NumeroApolice</span>
+                            </td>
+                            <td class="apolice-susep">
+                                @item.ProcessoSusep
+                            </td>
+                            <td class="apolice-data-emissao">
+                                @item.DataEmissao.ToString("dd/MM/yyyy") - @item.DataTermino.ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="apolice-status">
+                                <div class="table-cell-icon">
+                                    @if (item.Status == status_apolice.emitida)
+                                    {
+                                        <i class="fa fa-circle-check circle-check-green"></i>
+                                        <span>@Html.DisplayFor(modelItem => item.Status)</span>
+                                    } else
+                                    {
+                                        <i class="fa fa-times-circle times-circle-red"></i>
+                                        <span>@Html.DisplayFor(modelItem => item.Status);</span>
+                                    }
+                                </div>
+                            </td>
+                            <td class="table-cell-buttons">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-table me-2">
+                                        <i class="fa fa-pen"></i>
+                                    </button>
+                                    <button class="btn btn-table me-2 border-0 cancelar">
+                                        <i class="fa fa-times-circle"></i>
+                                    </button>
+                                    <button class="btn btn-table remove">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    <tr class="d-none"><!-- Aprovada -->
                         <td class="apolice-numero">
                             <div class="avatar avatar-circle avatar-xs">
                                 <i class="fa fa-file-alt align-middle"></i>
@@ -78,7 +123,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr class="table-line-disabled"><!-- Cancelada -->
+                    <tr class="table-line-disabled d-none"><!-- Cancelada -->
                         <td class="apolice-numero">
                             <div class="avatar avatar-circle avatar-xs">
                                     <i class="fa fa-file-alt align-middle"></i>

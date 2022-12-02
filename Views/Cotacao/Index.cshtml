@@ -1,3 +1,5 @@
+@model IEnumerable<ApoliSys.Models.Cotacao>
+
 @{
     ViewData["Title"] = "Cotações";
 }
@@ -49,10 +51,57 @@
                                 <i class="fa fa-plus"></i>
                                 Gerar uma cotação
                             </div>
-                            <a href="~/Cotacao/Cadastrar" class="stretched-link"></a>
+                            <a href="~/Veiculo/@ViewBag.IdVeiculo/Cotacao/Cadastrar" class="stretched-link"></a>
                         </td>
                     </tr>
-                    <tr><!-- Em andamento -->
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cotacao-plano">
+                                <div class="avatar avatar-circle avatar-xs">
+                                        <i class="fa fa-list-check align-middle"></i>
+                                </div>
+                                <span>
+                                    @Html.DisplayFor(modelItem => item.PlanoSeguro)
+                                </span>
+                            </td>
+                            <td class="cotacao-valor-pagamento">
+                                R$ @item.ValorPremioSeguro
+                            </td>
+                            <td class="cotacao-valor-total">
+                                R$ @item.ValorTotalPremioSeguro
+                            </td>
+                            <td class="cotacao-forma-pagamento">
+                                @Html.DisplayFor(modelItem => item.FormaPagamento)
+                            </td>
+                            <td class="cotacao-status">
+                                <div class="table-cell-icon">
+                                    <i class="fa fa-clock clock-gray"></i>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </div>
+                            </td>
+                            <td class="table-cell-buttons">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-table me-2">
+                                        <i class="fa fa-pen"></i>
+                                    </button>
+                                    <button class="btn btn-table me-2 aprovar">
+                                        <i class="fa fa-circle-check"></i>
+                                    </button>
+                                    <button class="btn btn-table me-2 negar">
+                                        <i class="fa fa-times-circle"></i>
+                                    </button>
+                                    <button class="btn btn-table remove ">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="stretched-link" href="/Cotacao/@item.Id/Apolice"></a>
+                            </td>
+                        </tr>
+                    }
+                    <tr class=" d-none"><!-- Em andamento -->
                         <td class="cotacao-plano">
                             <div class="avatar avatar-circle avatar-xs">
                                     <i class="fa fa-list-check align-middle"></i>
@@ -92,7 +141,7 @@
                         </td>
                         <td></td>
                     </tr>
-                    <tr><!-- Aprovada -->
+                    <tr class=" d-none"><!-- Aprovada -->
                         <td class="cotacao-plano">
                             <div class="avatar avatar-circle avatar-xs">
                                     <i class="fa fa-list-check align-middle"></i>
@@ -134,7 +183,7 @@
                             <a class="stretched-link" href="/apolices/"></a>
                         </td>
                     </tr>
-                    <tr class="table-line-disabled"><!-- Cancelada -->
+                    <tr class="table-line-disabled d-none"><!-- Cancelada -->
                         <td class="cotacao-plano">
                             <div class="avatar avatar-circle avatar-xs">
                                     <i class="fa fa-list-check align-middle"></i>

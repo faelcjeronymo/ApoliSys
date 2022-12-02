@@ -6,7 +6,7 @@
 
 <div class="row mt-xxl-5">
     <div class="col-12 col-sm-auto mx-sm-auto">
-        <h5 class="text-primary text-center">Cadastrar um Segurado</h5>
+        <h5 class="text-primary text-center">Cadastrar um Usuário</h5>
     </div>
 </div>
 <div class="row justify-content-sm-center mb-5">
@@ -29,7 +29,7 @@
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="Pessoa.Nome" class="form-label">Nome<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Pessoa.Nome" class="form-control" placeholder="Ex. Ana Maria da Silva" required/>
+                <input form="form-cadastrar" asp-for="Pessoa.Nome" class="form-control" placeholder="Ex. Jorge Alves" required/>
                 <span asp-validation-for="Pessoa.Nome" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
@@ -46,7 +46,7 @@
             </div>
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="Pessoa.CpfCnpj" class="form-label">CPF/CNPJ<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Pessoa.CpfCnpj" class="form-control" placeholder="Digite o CPF/CNPJ do Segurado" required/>
+                <input form="form-cadastrar" asp-for="Pessoa.CpfCnpj" class="form-control" placeholder="Digite o CPF/CNPJ do Usuário" required/>
                 <span asp-validation-for="Pessoa.CpfCnpj" class="invalid-feedback">Campo Obrigatório</span>
                 <div class="form-check form-switch mt-1 d-flex">
                     <input class="form-check-input" id="usar-cnpj" name="usar-cnpj" type="checkbox" role="switch">
@@ -59,16 +59,9 @@
                 <span asp-validation-for="Pessoa.Celular" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-10 col-md-12 form-group">
-                <label asp-for="Segurado.Profissao" class="form-label">Profissão<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Segurado.Profissao" class="form-control" placeholder="Ex. Aux. Administrativo / Aux. de Operações / Nenhuma" required/>
-                <span asp-validation-for="Segurado.Profissao" class="invalid-feedback">Campo Obrigatório</span>
-            </div>
-            <div class="col-sm-10 col-md-12 form-group">
-                <label asp-for="Segurado.FaixaSalarial" class="form-label">Faixa Salarial<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="Segurado.FaixaSalarial" asp-items="Html.GetEnumSelectList<faixa_salarial>()" required>
-                    <option value="" disabled selected>Selecione</option>
-                </select>
-                <span asp-validation-for="Segurado.FaixaSalarial" class="invalid-feedback">Campo obrigatório</span>
+                <label asp-for="Pessoa.Id" class="form-label">Senha<sup>*</sup></label>
+                <input form="form-cadastrar" asp-for="Pessoa.Id" class="form-control" placeholder="Digite uma senha para o usuário." type="Text" required/>
+                <span asp-validation-for="Pessoa.Id" class="invalid-feedback">Campo Obrigatório</span>
             </div>
         </div>
     </div>

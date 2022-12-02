@@ -19,19 +19,30 @@ function aplicarMascarasFormatacao() {
     let inputCnh = $("input[name*='Cnh']");
     let inputCelular = $("input[name*='Celular']");
     let inputCep = $("input[name*='Cep']");
+
     let inputFipe = $("input[name*='CodigoFipe']");
     let inputPlaca = $("input[name*='Placa']");
-    let inputKm = $("input[name*='Km']");
+    // let inputKm = $("input[name*='Km']");
     let inputValor = $("input[name*='Valor']");
+    let inputAno = $("input[name*='Ano']");
+    let inputRenavam = $("input[name*='Renavam']");
     
+    let inputProcessoSusep = $("input[name*='ProcessoSusep']");
+    let inputNumeroApolice = $("input[name*='NumeroApolice']");
+
     inputCpfCnpj.mask("000.000.000-00");
     inputCnh.mask("00000000000");
     inputCelular.mask("(00) 00000-0000");
     inputCep.mask("00000-000");
     inputFipe.mask("00000-00");
     inputPlaca.mask("AAA-0000");
-    inputKm.mask("000.000.000.000.000");
+    // inputKm.mask("000.000.000.000.000");
     inputValor.mask("000.000.000.000.000,00", {reverse: true});
+    inputAno.mask("0000");
+    inputRenavam.mask("000000000");
+
+    inputProcessoSusep.mask("00000000000000000000");
+    inputNumeroApolice.mask("000000000");
 }
 
 /**
@@ -265,14 +276,14 @@ function exibir_notificacao(tipoNotificacao, mensagemNotificacao) {
     toastElement.classList.add("toast", corNotificacao, "align-items-center", "border-0", "mt-2", "text-white");
     toastElement.setAttribute("role", "alert");
 
-    toastElementContainer.classList.add("d-flex", "align-items-center");
+    toastElementContainer.classList.add("d-flex", "align-items-center", "justify-content-between");
 
-    toastIcon.classList.add("fa", iconeNotificacao, "mx-auto", "fa-lg");
+    toastIcon.classList.add("fa", iconeNotificacao, "fa-lg", "mx-2");
 
     toastElementBody.classList.add("toast-body", "ps-0");
     toastElementBody.append(mensagemNotificacao);
 
-    toastCloseButton.classList.add("btn-close", "btn-close-white", "me-2" , "ms-auto");
+    toastCloseButton.classList.add("btn-close", "btn-close-white", "me-2");
     toastCloseButton.setAttribute("data-bs-dismiss", "toast");
 
     //Contruindo hierarquia de elementos

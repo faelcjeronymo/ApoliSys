@@ -9,7 +9,8 @@
         <h5 class="text-primary text-center">Emitir uma Apólice</h5>
     </div>
 </div>
-<form id="form-cadastrar" action="/Apolice/SalvarCadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-cadastrar" action="/Apolice/Cadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+    <input type="hidden" asp-for="IdCotacao" value="@ViewBag.IdCotacao">
     <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-5 col-md-6 form-group">
@@ -19,7 +20,7 @@
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="NumeroApolice" class="form-label">N<sup>o</sup> Apólice</label>
-                <input form="form-cadastrar" asp-for="NumeroApolice" class="form-control" placeholder="Ex. 012345678" type="number" required value=""/>
+                <input form="form-cadastrar" asp-for="NumeroApolice" class="form-control" placeholder="Ex. 012345678" type="number" required value='@String.Format("{0:000000000}", @ViewBag.NumeroApolice)'/>
                 <span asp-validation-for="NumeroApolice" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group me-auto">

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ApoliSys.Models;
@@ -10,14 +11,44 @@ namespace ApoliSys.Controllers
     public class CotacaoController : Controller
     {
         ApoliSysContext _context = new ApoliSysContext();
-        public IActionResult Index()
+        
+        [HttpGet]
+        [Route("Veiculo/{IdVeiculo:int}/Cotacao")]
+        public IActionResult Index(int IdVeiculo)
         {
+            var cotacoes = _context.Cotacaos.Where(c => c.IdVeiculo == IdVeiculo).ToList();
+
+            ViewBag.IdVeiculo = IdVeiculo;
+
+            return View(cotacoes);
+        }
+
+        [HttpGet]
+        [Route("Veiculo/{IdVeiculo:int}/Cotacao/Cadastrar")]
+        public IActionResult Cadastrar(int IdVeiculo)
+        {
+            var veiculo = _context.Veiculos.FirstOrDefault(v => v.Id == IdVeiculo);
+
+            ViewBag.IdVeiculo = veiculo.Id;
+
             return View();
         }
 
-        public IActionResult Cadastrar()
+        [HttpPost]
+        public IActionResult Cadastrar(Cotacao cotacao) 
         {
-            return View();
+            if (cotacao.Cadastrar() == false) 
+            {
+                return UnprocessableEntity(new {
+                    sucesso = 0,
+                    mensagem = "Ocorreu um problema ao cadastrar a cotação."
+                });
+            }
+
+            return Ok(new {
+                sucesso = 1,
+                mensagem = "Cotação Cadastrada!"
+            });
         }
 
         [HttpGet]

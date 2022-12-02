@@ -12,5 +12,10 @@ namespace ApoliSys.Controllers
         {
             return View();
         }
+
+        [Route("Login/")]
+        public IActionResult Login () {
+            return View();
+        }
     }
 }

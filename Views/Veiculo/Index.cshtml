@@ -50,7 +50,7 @@
                             <div class="table-cell-icon">
                                 <i class="fa fa-plus"></i>
                                 Cadastrar um veículo
-                                <a asp-controller="Veiculo" asp-action="Cadastrar" class="stretched-link"></a>
+                                <a href='~/Segurado/@ViewBag.IdSegurado/Veiculo/Cadastrar' class="stretched-link"></a>
                             </div>
                         </td>
                     </tr>
@@ -86,7 +86,7 @@
                                 </div>
                             </td>
                             <td colspan="0">
-                                <a class="stretched-link" href="/veiculos/"></a>
+                                <a class="stretched-link" href="/Veiculo/@item.Id/Cotacao"></a>
                             </td>
                         </tr>
                     }

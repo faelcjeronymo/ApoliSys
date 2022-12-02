@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ApoliSys.Models
 {
@@ -9,6 +10,8 @@ namespace ApoliSys.Models
         {
             Apolices = new HashSet<Apolice>();
         }
+
+        ApoliSysContext _context = new ApoliSysContext();
 
         public int Id { get; set; }
         public int IdVeiculo { get; set; }
@@ -20,5 +23,22 @@ namespace ApoliSys.Models
 
         public virtual Veiculo IdVeiculoNavigation { get; set; } = null!;
         public virtual ICollection<Apolice> Apolices { get; set; }
+
+        public bool Cadastrar () {
+            try
+            {
+                _context.Cotacaos.Add(this);
+
+                _context.SaveChanges();
+            }
+            catch (System.Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+
+            return true;
+        }
     }
 }

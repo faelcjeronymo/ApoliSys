@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ApoliSys.Models;
@@ -13,27 +14,52 @@ namespace ApoliSys.Controllers
         private ApoliSysContext _context = new ApoliSysContext();
 
         [HttpGet]
-        [Route("Segurado/{idSegurado:int}/Veiculo")]
-        public IActionResult Index(int idSegurado)
+        [Route("Segurado/{IdSegurado:int}/Veiculo")]
+        public IActionResult Index(int IdSegurado)
         {
-            var veiculo = _context.Veiculos.ToList();
+            var veiculos = _context.Veiculos.Where(v => v.IdSegurado == IdSegurado).ToList();
 
-            return View(veiculo);
-        }
+            ViewBag.IdSegurado = IdSegurado;
 
-        public IActionResult Cadastrar()
-        {
-            Veiculo veiculo = new Veiculo();
-
-            return View(veiculo);
+            return View(veiculos);
         }
 
         [HttpGet]
-        [Route("Segurado/{idSegurado:int}/Veiculo/Modificar/{idVeiculo:int}")]
-        public IActionResult Modificar(int idSegurado, int idVeiculo) {
+        [Route("Segurado/{IdSegurado:int}/Veiculo/Cadastrar")]
+        public IActionResult Cadastrar(int IdSegurado)
+        {
+            var segurado = _context.Segurados.FirstOrDefault(s => s.Id == IdSegurado);
+
+            ViewBag.IdSegurado = segurado.Id;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Cadastrar(Veiculo veiculo) 
+        {
+            Debug.WriteLine(veiculo.Km.ToString());
+
+            if (veiculo.Cadastrar() == false) 
+            {
+                return Ok(new {
+                    sucesso = 0,
+                    mensagem = "Algo deu errado ao cadastrar o Veículo."
+                });
+            }
+
+            return Ok(new {
+                sucesso = 1,
+                mensagem = "Veículo Cadastrado!"
+            });
+        }
+
+        [HttpGet]
+        [Route("Segurado/{IdSegurado:int}/Veiculo/Modificar/{idVeiculo:int}")]
+        public IActionResult Modificar(int IdSegurado, int idVeiculo) {
 
             var veiculo = _context.Veiculos
-            .Where(v => v.IdSegurado == idSegurado)
+            .Where(v => v.IdSegurado == IdSegurado)
             .FirstOrDefault(v => v.Id == idVeiculo);
 
             if (veiculo == null) {
@@ -44,10 +70,10 @@ namespace ApoliSys.Controllers
         }
 
         [HttpGet]
-        [Route("Segurado/{idSegurado:int}/Veiculo/{idVeiculo:int}")]
-        public IActionResult Informacoes (int idSegurado, int idVeiculo) {
+        [Route("Segurado/{IdSegurado:int}/Veiculo/{idVeiculo:int}")]
+        public IActionResult Informacoes (int IdSegurado, int idVeiculo) {
             var veiculo = _context.Veiculos
-            .Where(v => v.IdSegurado == idSegurado)
+            .Where(v => v.IdSegurado == IdSegurado)
             .FirstOrDefault(v => v.Id == idVeiculo);
 
             if (veiculo == null) {
