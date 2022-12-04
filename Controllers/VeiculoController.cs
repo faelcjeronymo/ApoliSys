@@ -55,12 +55,12 @@ namespace ApoliSys.Controllers
         }
 
         [HttpGet]
-        [Route("Segurado/{IdSegurado:int}/Veiculo/Modificar/{idVeiculo:int}")]
-        public IActionResult Modificar(int IdSegurado, int idVeiculo) {
+        [Route("Segurado/{IdSegurado:int}/Veiculo/Modificar/{IdVeiculo:int}")]
+        public IActionResult Modificar(int IdSegurado, int IdVeiculo) {
 
             var veiculo = _context.Veiculos
             .Where(v => v.IdSegurado == IdSegurado)
-            .FirstOrDefault(v => v.Id == idVeiculo);
+            .FirstOrDefault(v => v.Id == IdVeiculo);
 
             if (veiculo == null) {
                 return NotFound();
@@ -68,6 +68,12 @@ namespace ApoliSys.Controllers
 
             return View(veiculo);
         }
+
+        /* [HttpPost]
+        [Route("Veiculo/Modificar/{IdVeiculo:int}")]
+        public IActionResult Modificar(int IdVeiculo) {
+            
+        } */
 
         [HttpGet]
         [Route("Segurado/{IdSegurado:int}/Veiculo/{idVeiculo:int}")]

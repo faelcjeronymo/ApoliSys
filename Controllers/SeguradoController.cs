@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApoliSys.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApoliSys.Controllers
@@ -25,7 +26,7 @@ namespace ApoliSys.Controllers
         public IActionResult Index()
         {
             var Segurados = _context.Segurados.Include(s => s.IdPessoaNavigation);
-            return View(Segurados.ToList());
+            return View(Segurados.ToList().OrderBy(s => s.IdPessoaNavigation.Nome));
         }
 
         public IActionResult Cadastrar()
@@ -37,7 +38,8 @@ namespace ApoliSys.Controllers
         public JsonResult SalvarCadastrar(Pessoa pessoa, Segurado segurado)
         {
 
-            if (pessoa.validarDataNascimento() == false) {
+            if (pessoa.validarDataNascimento() == false) 
+            {
                 return Json(new {
                     sucesso = 0,
                     mensagem = "Por favor, digite uma Data de Nascimento válida."
@@ -52,7 +54,8 @@ namespace ApoliSys.Controllers
                 });
             }
 
-            if (pessoa.Cep != null) {
+            if (pessoa.Cep != null) 
+            {
                 if (pessoa.validarCep() == false) {
                         return Json(new {
                             sucesso = 0,
@@ -61,7 +64,8 @@ namespace ApoliSys.Controllers
                 }
             }
 
-            if (segurado.Cadastrar(pessoa) == false) {
+            if (segurado.Cadastrar(pessoa) == false) 
+            {
                 return Json(new {
                     sucesso = 0,
                     mensagem = "Algo deu errado ao cadastrar o Segurado.",
@@ -75,14 +79,15 @@ namespace ApoliSys.Controllers
         }
 
         [HttpGet]
-        [Route("Segurado/Modificar/{id:int}")]
-        public IActionResult Modificar(int id) {
+        [Route("Segurado/Modificar/{IdSegurado:int}")]
+        public IActionResult Modificar(int IdSegurado) {
 
             var segurado = _context.Segurados
             .Include(s => s.IdPessoaNavigation)
-            .FirstOrDefault(m => m.Id == id);
+            .FirstOrDefault(s => s.Id == IdSegurado);
 
-            if (segurado == null) {
+            if (segurado == null) 
+            {
                 return NotFound();
             }
 
@@ -90,37 +95,68 @@ namespace ApoliSys.Controllers
         }
 
         [HttpPut]
-        public JsonResult SalvarModificar(Pessoa pessoa, Segurado segurado)
+        [Route("Segurado/Modificar/{IdSegurado:int}")]
+        public IActionResult Modificar(Segurado segurado)
         {
 
-            var data = _context.Segurados.FirstOrDefault(s => s.Id == segurado.Id);
+            int IdSegurado = segurado.Id;
 
-            if (pessoa.validarDataNascimento() == false) {
-                return Json(new {
-                    sucesso = 0,
-                    mensagem = "Por favor, digite uma Data de Nascimento válida."
-                });
-            }
-
-            if (pessoa.validarCpfCnpj() == false)
+            try
             {
-                return Json(new {
-                    sucesso = 0,
-                    mensagem = "Por favor, digite um CPF/CNPJ Válido.",
-                });
-            }
+                var Segurado = _context.Segurados.Include(s => s.IdPessoaNavigation).FirstOrDefault(s => s.Id == IdSegurado);
 
-            if (pessoa.Cep != null) {
-                if (pessoa.validarCep() == false) {
-                        return Json(new {
+                if (Segurado != null) {
+
+                    if (segurado.IdPessoaNavigation.validarDataNascimento() == false) 
+                    {
+                        return Ok(new {
                             sucesso = 0,
-                            mensagem = "Por favor, digite um CEP Válido.",
+                            mensagem = "Por favor, digite uma Data de Nascimento válida."
                         });
+                    }
+
+                    if (segurado.IdPessoaNavigation.validarCpfCnpj() == false)
+                    {
+                        return Ok(new {
+                            sucesso = 0,
+                            mensagem = "Por favor, digite um CPF/CNPJ Válido.",
+                        });
+                    }
+
+                    if (segurado.IdPessoaNavigation.Cep != null) 
+                    {
+                        if (segurado.IdPessoaNavigation.validarCep() == false) 
+                        {
+                                return Ok(new {
+                                    sucesso = 0,
+                                    mensagem = "Por favor, digite um CEP Válido.",
+                                });
+                        }
+                    }
+
+                    if (Segurado.Modificar(segurado) == false) 
+                    {
+                        return Ok(new {
+                            sucesso = 0,
+                            mensagem = "Algo deu errado ao modificar o Segurado.",
+                        });
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
 
-            return Json(new {
-                successo = 1,
+                return Ok(new {
+                    sucesso = 0,
+                    mensagem = "Algo deu errado ao modificar o Segurado."
+                });
+
+                throw;
+            }
+
+            return Ok(new {
+                sucesso = 1,
                 mensagem = "Segurado Modificado!",
             });
         }

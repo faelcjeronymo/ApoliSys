@@ -133,6 +133,7 @@ function enviarFormulario (urlAcao, metodoAcao) {
         },
         error: (requisicao, status, erro) => {
             console.log(requisicao + " " + status);
+            removerCarregandoBotao();
         }
 
     });

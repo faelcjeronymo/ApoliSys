@@ -29,29 +29,30 @@
         </div> *@
     </div>
 </div>
-<form id="form-cadastrar" action="/Segurado/SalvarModificar" method="PUT" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-modificar" action="/Segurado/Modificar/@Model.Id" method="PUT" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+    <input type="hidden" asp-for="Id" form="form-modificar" value="@Model.Id">
     <div class="col-md-8 col-xl-6 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="IdPessoaNavigation.Nome" class="form-label">Nome<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Nome" class="form-control" placeholder="Ex. Ana Maria da Silva" required/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Nome" class="form-control" placeholder="Ex. Ana Maria da Silva" required/>
                 <span asp-validation-for="IdPessoaNavigation.Nome" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="IdPessoaNavigation.Genero" class="form-label">Gênero<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="IdPessoaNavigation.Genero" asp-items="Html.GetEnumSelectList<genero>()" required>
+                <select form="form-modificar" asp-for="IdPessoaNavigation.Genero" asp-items="Html.GetEnumSelectList<genero>()" required>
                     <option value="" disabled selected>Selecione</option>
                 </select>
                 <span asp-validation-for="IdPessoaNavigation.Genero" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="IdPessoaNavigation.DataNascimento" class="form-label">Data de Nascimento<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.DataNascimento" type="date" class="form-control" required>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.DataNascimento" type="date" class="form-control" required>
                 <span asp-validation-for="IdPessoaNavigation.DataNascimento" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="IdPessoaNavigation.CpfCnpj" class="form-label">CPF/CNPJ<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.CpfCnpj" class="form-control" placeholder="Digite o CPF/CNPJ do Segurado" required/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.CpfCnpj" class="form-control" placeholder="Digite o CPF/CNPJ do Segurado" required/>
                 <span asp-validation-for="IdPessoaNavigation.CpfCnpj" class="invalid-feedback">Campo Obrigatório</span>
                 <div class="form-check form-switch mt-1 d-flex">
                     <input class="form-check-input" id="usar-cnpj" name="usar-cnpj" type="checkbox" role="switch">
@@ -60,17 +61,17 @@
             </div>
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="IdPessoaNavigation.Celular" class="form-label">Número de Celular<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Celular" class="form-control" placeholder="Ex. (12) 99345-6789" type="tel" required/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Celular" class="form-control" placeholder="Ex. (12) 99345-6789" type="tel" required/>
                 <span asp-validation-for="IdPessoaNavigation.Celular" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="Profissao" class="form-label">Profissão<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Profissao" class="form-control" placeholder="Ex. Aux. Administrativo / Aux. de Operações / Nenhuma" required/>
+                <input form="form-modificar" asp-for="Profissao" class="form-control" placeholder="Ex. Aux. Administrativo / Aux. de Operações / Nenhuma" required/>
                 <span asp-validation-for="Profissao" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="FaixaSalarial" class="form-label">Faixa Salarial<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="FaixaSalarial" asp-items="Html.GetEnumSelectList<faixa_salarial>()" required>
+                <select form="form-modificar" asp-for="FaixaSalarial" asp-items="Html.GetEnumSelectList<faixa_salarial>()" required>
                     <option value="" disabled selected>Selecione</option>
                 </select>
                 <span asp-validation-for="FaixaSalarial" class="invalid-feedback">Campo obrigatório</span>
@@ -89,17 +90,17 @@
             </div>
             <div class="col-sm-4 form-group flex-md-grow-1">
                 <label asp-for="IdPessoaNavigation.Cep" class="form-label">CEP</label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Cep" class="form-control" placeholder="Ex. 12345-678" data-preencher-endereco="true"/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Cep" class="form-control" placeholder="Ex. 12345-678" data-preencher-endereco="true"/>
                 <span asp-validation-for="IdPessoaNavigation.Cep" class="invalid-feedback">CEP Inválido.</span>
             </div>
             <div class="col-8 col-sm-4 col-xxl-5 me-xxl-auto form-group flex-md-grow-1">
                 <label asp-for="IdPessoaNavigation.Cidade" class="form-label">Cidade</label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Cidade" class="form-control" placeholder="Ex. Ribeirão Preto"/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Cidade" class="form-control" placeholder="Ex. Ribeirão Preto"/>
                 <span asp-validation-for="IdPessoaNavigation.Cidade" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-4 col-sm-2 col-xxl-3 form-group flex-md-grow-1">
                 <label asp-for="IdPessoaNavigation.Estado" class="form-label">UF</label>
-                <select form="form-cadastrar" asp-for="IdPessoaNavigation.Estado">
+                <select form="form-modificar" asp-for="IdPessoaNavigation.Estado">
                     <option value="0" selected disabled>UF</option>
                     <option value="AC">AC</option>
                     <option value="AL">AL</option>
@@ -133,22 +134,22 @@
             </div>
             <div class="col-sm-10 col-lg-12 form-group flex-md-grow-1">
                 <label asp-for="IdPessoaNavigation.Bairro" class="form-label">Bairro</label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Bairro" class="form-control" placeholder="Ex. Campos Elísios"/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Bairro" class="form-control" placeholder="Ex. Campos Elísios"/>
                 <span asp-validation-for="IdPessoaNavigation.Bairro" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-6 form-group flex-md-grow-1">
                 <label asp-for="IdPessoaNavigation.Rua" class="form-label">Rua</label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Rua" class="form-control" placeholder="Ex. Presidente Vargas"/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Rua" class="form-control" placeholder="Ex. Presidente Vargas"/>
                 <span asp-validation-for="IdPessoaNavigation.Rua" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-4 form-group flex-md-grow-1">
                 <label asp-for="IdPessoaNavigation.Numero" class="form-label">Número</label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Numero" class="form-control" placeholder="Ex. 123"/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Numero" class="form-control" placeholder="Ex. 123"/>
                 <span asp-validation-for="IdPessoaNavigation.Numero" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-10 col-lg-12 form-group flex-md-grow-1">
                 <label asp-for="IdPessoaNavigation.Complemento" class="form-label">Complemento</label>
-                <input form="form-cadastrar" asp-for="IdPessoaNavigation.Complemento" class="form-control" placeholder="Ex. Ap. 3 - Bloco B"/>
+                <input form="form-modificar" asp-for="IdPessoaNavigation.Complemento" class="form-control" placeholder="Ex. Ap. 3 - Bloco B"/>
                 <span asp-validation-for="IdPessoaNavigation.Complemento" class="invalid-feedback">Campo Obrigatório</span>
             </div>
         </div>
@@ -157,7 +158,7 @@
     <div class="col-sm-11 col-md-8 col-xl-6 col-xxl-4">
         <div class="row">
             <div class="col-12 col-sm-3 ms-sm-auto">
-                <button type="submit" class="btn btn-primary w-100" form="form-cadastrar">Avançar</button>
+                <button type="submit" class="btn btn-primary w-100" form="form-modificar">Modificar</button>
             </div>
         </div>
     </div>

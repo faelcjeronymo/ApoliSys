@@ -16,6 +16,8 @@ namespace ApoliSys.Models
             Veiculos = new HashSet<Veiculo>();
         }
 
+        ApoliSysContext _context = new ApoliSysContext();
+
         public int Id { get; set; }
         public int IdPessoa { get; set; }
         public faixa_salarial FaixaSalarial { get; set; }
@@ -27,8 +29,6 @@ namespace ApoliSys.Models
         public bool Cadastrar (Pessoa pessoa) {
             try
             {
-                DbContext _context = new ApoliSysContext();
-
                 //Removendo mascaras de formatacao
                 pessoa.CpfCnpj = pessoa.CpfCnpj.Replace("-", "").Replace(".", "");
                 pessoa.Celular = pessoa.Celular.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
@@ -43,11 +43,48 @@ namespace ApoliSys.Models
                 _context.Add(this);
 
                 _context.SaveChanges();
-
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.StackTrace);
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+
+            return true;
+        }
+
+        public bool Modificar (Segurado NovasInfoSegurado) {
+            try
+            {
+                IdPessoaNavigation.Nome = NovasInfoSegurado.IdPessoaNavigation.Nome;
+                IdPessoaNavigation.Genero = NovasInfoSegurado.IdPessoaNavigation.Genero;
+                IdPessoaNavigation.DataNascimento = NovasInfoSegurado.IdPessoaNavigation.DataNascimento;
+                IdPessoaNavigation.CpfCnpj = NovasInfoSegurado.IdPessoaNavigation.CpfCnpj.Replace("-", "").Replace(".", "");
+                IdPessoaNavigation.Celular = NovasInfoSegurado.IdPessoaNavigation.Celular.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
+
+                Profissao = NovasInfoSegurado.Profissao;
+                FaixaSalarial = NovasInfoSegurado.FaixaSalarial;
+
+                if (NovasInfoSegurado.IdPessoaNavigation.Cep != null) {
+                    IdPessoaNavigation.Cep = NovasInfoSegurado.IdPessoaNavigation.Cep.Replace("-", "");
+                }
+                
+                IdPessoaNavigation.Cidade = NovasInfoSegurado.IdPessoaNavigation.Cidade;
+                IdPessoaNavigation.Estado = NovasInfoSegurado.IdPessoaNavigation.Estado;
+                IdPessoaNavigation.Bairro = NovasInfoSegurado.IdPessoaNavigation.Bairro;
+                IdPessoaNavigation.Rua = NovasInfoSegurado.IdPessoaNavigation.Rua;
+                IdPessoaNavigation.Numero = NovasInfoSegurado.IdPessoaNavigation.Numero;
+                IdPessoaNavigation.Complemento = NovasInfoSegurado.IdPessoaNavigation.Complemento;
+
+                _context.Update(IdPessoaNavigation);
+                _context.Update(this);
+
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
                 return false;
                 throw;
             }
