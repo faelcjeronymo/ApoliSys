@@ -50,7 +50,8 @@ namespace ApoliSys.Controllers
 
             return Ok(new {
                 sucesso = 1,
-                mensagem = "Veículo Cadastrado!"
+                mensagem = "Veículo Cadastrado!",
+                urlRedirecionamento = "Segurado/" + veiculo.IdSegurado + "/Veiculo",
             });
         }
 
@@ -60,7 +61,7 @@ namespace ApoliSys.Controllers
 
             var veiculo = _context.Veiculos
             .Where(v => v.IdSegurado == IdSegurado)
-            .FirstOrDefault(v => v.Id == IdVeiculo);
+            .SingleOrDefault(v => v.Id == IdVeiculo);
 
             if (veiculo == null) {
                 return NotFound();

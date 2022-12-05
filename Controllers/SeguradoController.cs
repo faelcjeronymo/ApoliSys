@@ -35,12 +35,12 @@ namespace ApoliSys.Controllers
         }
 
         [HttpPost]
-        public JsonResult SalvarCadastrar(Pessoa pessoa, Segurado segurado)
+        public IActionResult Cadastrar(Pessoa pessoa, Segurado segurado)
         {
 
             if (pessoa.validarDataNascimento() == false) 
             {
-                return Json(new {
+                return Ok(new {
                     sucesso = 0,
                     mensagem = "Por favor, digite uma Data de Nascimento válida."
                 });
@@ -48,7 +48,7 @@ namespace ApoliSys.Controllers
 
             if (pessoa.validarCpfCnpj() == false)
             {
-                return Json(new {
+                return Ok(new {
                     sucesso = 0,
                     mensagem = "Por favor, digite um CPF/CNPJ Válido.",
                 });
@@ -57,7 +57,7 @@ namespace ApoliSys.Controllers
             if (pessoa.Cep != null) 
             {
                 if (pessoa.validarCep() == false) {
-                        return Json(new {
+                        return Ok(new {
                             sucesso = 0,
                             mensagem = "Por favor, digite um CEP Válido.",
                         });
@@ -66,25 +66,27 @@ namespace ApoliSys.Controllers
 
             if (segurado.Cadastrar(pessoa) == false) 
             {
-                return Json(new {
+                return Ok(new {
                     sucesso = 0,
                     mensagem = "Algo deu errado ao cadastrar o Segurado.",
                 });
             }
 
-            return Json(new {
-                successo = 1,
+            return Ok(new {
+                sucesso = 1,
                 mensagem = "Segurado Cadastrado!",
+                urlRedirecionamento = "Segurado/",
             });
         }
 
         [HttpGet]
         [Route("Segurado/Modificar/{IdSegurado:int}")]
-        public IActionResult Modificar(int IdSegurado) {
+        public IActionResult Modificar(int IdSegurado) 
+        {
 
             var segurado = _context.Segurados
             .Include(s => s.IdPessoaNavigation)
-            .FirstOrDefault(s => s.Id == IdSegurado);
+            .SingleOrDefault(s => s.Id == IdSegurado);
 
             if (segurado == null) 
             {
@@ -103,7 +105,7 @@ namespace ApoliSys.Controllers
 
             try
             {
-                var Segurado = _context.Segurados.Include(s => s.IdPessoaNavigation).FirstOrDefault(s => s.Id == IdSegurado);
+                var Segurado = _context.Segurados.Include(s => s.IdPessoaNavigation).SingleOrDefault(s => s.Id == IdSegurado);
 
                 if (Segurado != null) {
 
@@ -158,21 +160,47 @@ namespace ApoliSys.Controllers
             return Ok(new {
                 sucesso = 1,
                 mensagem = "Segurado Modificado!",
+                urlRedirecionamento = "Segurado/"
             });
         }
 
         [HttpGet]
         [Route("Segurado/{id:int}")]
-        public IActionResult Informacoes (int id) {
+        public IActionResult Informacoes (int id) 
+        {
             var segurado = _context.Segurados
             .Include(s => s.IdPessoaNavigation)
-            .FirstOrDefault(m => m.Id == id);
+            .SingleOrDefault(s => s.Id == id);
 
             if (segurado == null) {
                 return NotFound();
             }
 
             return View(segurado);
+        }
+
+        [HttpDelete]
+        [Route("Segurado/Remover/{IdSegurado:int}")]
+        public IActionResult Remover (int IdSegurado)
+        {
+            Segurado? segurado = _context.Segurados.Include(s => s.IdPessoaNavigation).SingleOrDefault(s => s.Id == IdSegurado);
+
+            if (segurado != null)
+            {
+                if (segurado.Remover() == false)
+                {
+                    Ok(new {
+                        sucesso = 0,
+                        mensagem = "Algo deu errado ao remover o Segurado.",
+                    });
+                }
+            }
+
+            return Ok(new {
+                sucesso = 1,
+                mensagem = "Segurado removido!",
+                urlRedirecionamento = "Segurado/"
+            });
         }
     }
 }

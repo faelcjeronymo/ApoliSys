@@ -9,51 +9,51 @@
         <h5 class="text-primary text-center">Modificar um Veículo</h5>
     </div>
 </div>
-<form id="form-cadastrar" action="/Veiculo/SalvarCadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-modificar" action="/Veiculo/Modificar" method="PUT" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
     <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="CodigoFipe" class="form-label">Codigo Fipe<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="CodigoFipe" class="form-control" placeholder="Ex. 005027-0" maxlength="8" required/>
+                <input form="form-modificar" asp-for="CodigoFipe" class="form-control" placeholder="Ex. 005027-0" maxlength="8" required/>
                 <span asp-validation-for="CodigoFipe" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Modelo" class="form-label">Modelo<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Modelo" type="text" class="form-control" placeholder="Ex. Fusca" required>
+                <input form="form-modificar" asp-for="Modelo" type="text" class="form-control" placeholder="Ex. Fusca" required>
                 <span asp-validation-for="Modelo" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Ano" class="form-label">Ano<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Ano" class="form-control" placeholder="Ex. 1996" type="number" maxlength="4" required/>
+                <input form="form-modificar" asp-for="Ano" class="form-control" placeholder="Ex. 1996" type="number" maxlength="4" required/>
                 <span asp-validation-for="Ano" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Marca" class="form-label">Marca<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="Marca" asp-items="Html.GetEnumSelectList<marca>()" required>
+                <select form="form-modificar" asp-for="Marca" asp-items="Html.GetEnumSelectList<marca>()" required>
                     <option value="" disabled selected>Selecione</option>
                 </select>
                 <span asp-validation-for="Marca" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Categoria" class="form-label">Categoria<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="Categoria" asp-items="Html.GetEnumSelectList<categoria_veiculo>()" required>
+                <select form="form-modificar" asp-for="Categoria" asp-items="Html.GetEnumSelectList<categoria_veiculo>()" required>
                     <option value="" disabled selected>Selecione</option>
                 </select>
                 <span asp-validation-for="Categoria" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Placa" class="form-label">Placa<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Placa" type="text" class="form-control" placeholder="Ex. XYZ-1234" required>
+                <input form="form-modificar" asp-for="Placa" type="text" class="form-control" placeholder="Ex. XYZ-1234" required>
                 <span asp-validation-for="Placa" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Renavam" class="form-label">Renavam<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Renavam" class="form-control" placeholder="Ex. 123456789" type="text" maxlength="9" required>
+                <input form="form-modificar" asp-for="Renavam" class="form-control" placeholder="Ex. 123456789" type="text" maxlength="9" required>
                 <span asp-validation-for="Renavam" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="ZeroKm" class="form-label">Zero Km<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="ZeroKm" required>
+                <select form="form-modificar" asp-for="ZeroKm" required>
                     <option value="" disabled selected>Selecione</option>
                     <option value="0">Não</option>
                     <option value="1">Sim</option>
@@ -62,19 +62,19 @@
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Km" class="form-label">Quilometragem<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Km" class="form-control" placeholder="Ex. 138.000" type="text" required>
+                <input form="form-modificar" asp-for="Km" class="form-control" placeholder="Ex. 138.000" type="text" required>
                 <span asp-validation-for="Km" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Combustivel" class="form-label">Combustivel<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="Combustivel" asp-items="Html.GetEnumSelectList<combustivel>()" required>
+                <select form="form-modificar" asp-for="Combustivel" asp-items="Html.GetEnumSelectList<combustivel>()" required>
                     <option value="" disabled selected>Selecione</option>
                 </select>
                 <span asp-validation-for="Combustivel" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-10 col-md-12 form-group">
                 <label asp-for="Utilizacao" class="form-label">Utilização<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="Utilizacao" type="text" class="form-control" placeholder="Ex. Utilização Familiar" required>
+                <input form="form-modificar" asp-for="Utilizacao" type="text" class="form-control" placeholder="Ex. Utilização Familiar" required>
                 <span asp-validation-for="Utilizacao" class="invalid-feedback">Campo obrigatório</span>
             </div>
         </div>
@@ -83,7 +83,7 @@
     <div class="col-sm-11 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
         <div class="row">
             <div class="col-12 col-sm-3 ms-sm-auto">
-                <button type="submit" class="btn btn-primary w-100" form="form-cadastrar">Modificar</button>
+                <button type="submit" class="btn btn-primary w-100" form="form-modificar">Modificar</button>
             </div>
         </div>
     </div>

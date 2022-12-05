@@ -34,10 +34,6 @@ namespace ApoliSys.Models
             {
                 ApoliSysContext _context = new ApoliSysContext();
 
-                Debug.WriteLine(Km.ToString());
-
-                throw new Exception("Teste");
-
                 CodigoFipe = CodigoFipe.Replace("-", "");
 
                 TextInfo cultInfo = new CultureInfo("pt-BR", false).TextInfo;

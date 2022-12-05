@@ -63,7 +63,7 @@ function avancarEtapaFormulario() {
         let metodoAcao = $(this).attr("method");
 
         if (urlAcao == "") {
-            console.log("Coloque o Atributo Action no Formulário");
+            alert("Coloque o Atributo Action no Formulário");
             return false
         }
 
@@ -111,32 +111,6 @@ function avancarEtapaFormulario() {
             enviarFormulario(urlAcao, metodoAcao);
         }
     })
-}
-
-function enviarFormulario (urlAcao, metodoAcao) {
-    carregandoBotao();
-
-    let formulario = $("form")[0];
-    let formularioValores = new FormData(formulario);
-
-    //Enviando requisição
-    $.ajax({
-        url: urlAcao,
-        type: metodoAcao,
-        data: formularioValores,
-        processData: false,
-        cache: false,
-        contentType: false,
-        success: (respostaReq) => {
-            exibir_notificacao((respostaReq.sucesso == 0 ? "erro" : "sucesso"), respostaReq.mensagem);
-            removerCarregandoBotao();
-        },
-        error: (requisicao, status, erro) => {
-            console.log(requisicao + " " + status);
-            removerCarregandoBotao();
-        }
-
-    });
 }
 
 function buscarEnderecoViaCep () {
@@ -218,19 +192,52 @@ function carregandoBotao (seletorBotao = null) {
     elementoBotao.attr("disabled", true);
 }
 
-function removerCarregandoBotao (seletorBotao = null) {
-    if (seletorBotao == null) {
-        seletorBotao = "button[type='submit']";
-    }
 
-    let elementoBotao = $(seletorBotao);
-    
-    elementoBotao.removeAttr("disabled");
-    elementoBotao.find(".spinner-border").remove();
-    elementoBotao.find(".texto-auxiliar").css("visibility", "visible");
+function enviarFormulario (urlAcao, metodoAcao) {
+    carregandoBotao();
+
+    let formulario = $("form")[0];
+    let formularioValores = new FormData(formulario);
+
+    //Enviando requisição
+    $.ajax({
+        url: urlAcao,
+        type: metodoAcao,
+        data: formularioValores,
+        processData: false,
+        cache: false,
+        contentType: false,
+        success: (respostaReq) => {
+            exibirNotificacao((respostaReq.sucesso == 0 ? "erro" : "sucesso"), respostaReq.mensagem);
+            
+            removerCarregandoBotao();
+            
+            exibirCarregando();
+            
+            /**
+             * Redirecionando para o caminho especificado
+             * em respostaReq.urlRedirecionamento
+             */
+            setTimeout(() => {
+                redirecionarUrl(respostaReq.urlRedirecionamento);
+            }, 1500);
+        },
+        error: (requisicao, status, erro) => {
+            console.log(requisicao + " " + status);
+            removerCarregandoBotao();
+        }
+    });
 }
 
-function exibir_notificacao(tipoNotificacao, mensagemNotificacao) {
+function exibirCarregando () {
+    let spanSpinner = "<span class='spinner-border spinner-carregando top-50 start-50'></span>";
+    let elementoApplication = $(".application");
+
+    elementoApplication.append(spanSpinner);
+    elementoApplication.addClass("carregando");
+}
+
+function exibirNotificacao(tipoNotificacao, mensagemNotificacao) {
     /**
      * Variável para armazenar o nome
      * da classe que mudará a cor de 
@@ -245,7 +252,7 @@ function exibir_notificacao(tipoNotificacao, mensagemNotificacao) {
 
     switch (tipoNotificacao) {
         case "sucesso":
-            corNotificacao = "bg-primary";
+            corNotificacao = "bg-primary-dark";
             iconeNotificacao = "fa-circle-check";
             break;
         case "erro":
@@ -279,7 +286,7 @@ function exibir_notificacao(tipoNotificacao, mensagemNotificacao) {
 
     toastElementContainer.classList.add("d-flex", "align-items-center", "justify-content-between");
 
-    toastIcon.classList.add("fa", iconeNotificacao, "fa-lg", "mx-2");
+    toastIcon.classList.add("fa", iconeNotificacao, "fa-lg", "ms-4");
 
     toastElementBody.classList.add("toast-body", "ps-0");
     toastElementBody.append(mensagemNotificacao);
@@ -294,10 +301,10 @@ function exibir_notificacao(tipoNotificacao, mensagemNotificacao) {
     
     toastContainer.append(toastElement)
 
-    $(".main-content .card .card-body .container-fluid").append(toastContainer);
+    $(".application").append(toastContainer);
 
     let toastOptions = {
-        delay : 3000,
+        delay : 1500,
     }
 
     $(".toast").each(function (index, toastElem) {
@@ -331,6 +338,76 @@ function exibir_notificacao(tipoNotificacao, mensagemNotificacao) {
         }
     })
 
+}
+
+function redirecionarUrl (urlRelativaOrigem) {
+    if (urlRelativaOrigem == null) {
+        window.history.back();
+    }
+
+    const urlOrigem = window.location.origin;
+
+    let urlRedirecionamento = `${urlOrigem}/${urlRelativaOrigem}`;
+
+    window.location.href = urlRedirecionamento;
+}
+
+function removerCarregandoBotao (seletorBotao = null) {
+    if (seletorBotao == null) {
+        seletorBotao = "button[type='submit']";
+    }
+
+    let elementoBotao = $(seletorBotao);
+    
+    elementoBotao.removeAttr("disabled");
+    elementoBotao.find(".spinner-border").remove();
+    elementoBotao.find(".texto-auxiliar").css("visibility", "visible");
+}
+
+/**
+ * Função para criar uma requisição de "Remover"
+ * para as entidades do sistema.
+ * @param {string} entidade Nome da entidade à ser removida.
+ * @param {int} idEntidade Id da entidade à ser removida
+ * @returns {void}
+ */
+function removerInformacao (entidade, idEntidade) {
+    if ((entidade == null) || (idEntidade == null)) {
+        alert("Coloque as info. da entidade à ser removida.");
+        return false;
+    }
+
+    const urlEnvioRequisicao = `/${entidade}/Remover/${idEntidade}`;
+
+    //Enviando requisição
+    $.ajax({
+        url: urlEnvioRequisicao,
+        type: "DELETE",
+        processData: false,
+        cache: false,
+        contentType: false,
+        success: (respostaReq) => {
+            $("#modal-remover").modal("hide");
+            
+            exibirNotificacao((respostaReq.sucesso == 0 ? "erro" : "sucesso"), respostaReq.mensagem);
+            
+            removerCarregandoBotao(".btn-danger");
+            
+            exibirCarregando();
+            
+            /**
+             * Redirecionando para o caminho especificado
+             * em respostaReq.urlRedirecionamento
+             */
+            setTimeout(() => {
+                redirecionarUrl(respostaReq.urlRedirecionamento);
+            }, 2500);
+        },
+        error: (requisicao, status, erro) => {
+            console.log(requisicao + " " + status);
+            removerCarregandoBotao();
+        }
+    });
 }
 
 /**

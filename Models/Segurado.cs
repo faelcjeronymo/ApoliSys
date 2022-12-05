@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -26,12 +27,17 @@ namespace ApoliSys.Models
         public virtual Pessoa IdPessoaNavigation { get; set; } = null!;
         public virtual ICollection<Veiculo> Veiculos { get; set; }
 
-        public bool Cadastrar (Pessoa pessoa) {
+        public bool Cadastrar (Pessoa pessoa) 
+        {
             try
             {
                 //Removendo mascaras de formatacao
                 pessoa.CpfCnpj = pessoa.CpfCnpj.Replace("-", "").Replace(".", "");
                 pessoa.Celular = pessoa.Celular.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
+
+                //Deixando o Nome Capitalizado
+                TextInfo cultInfo = new CultureInfo("pt-BR", false).TextInfo;
+                pessoa.Nome = cultInfo.ToTitleCase(pessoa.Nome);
                 
                 if (pessoa.Cep != null) {
                     pessoa.Cep = pessoa.Cep.Replace("-", "");
@@ -54,7 +60,8 @@ namespace ApoliSys.Models
             return true;
         }
 
-        public bool Modificar (Segurado NovasInfoSegurado) {
+        public bool Modificar (Segurado NovasInfoSegurado) 
+        {
             try
             {
                 IdPessoaNavigation.Nome = NovasInfoSegurado.IdPessoaNavigation.Nome;
@@ -92,5 +99,33 @@ namespace ApoliSys.Models
             return true;
         }
         
+        public bool Remover ()
+        {
+            try
+            {
+                if (this.Id != 0)
+                {
+                    Debug.WriteLine(this.IdPessoaNavigation.Id);
+                    
+                    Segurado segurado = this;
+
+                    if (segurado.IdPessoaNavigation != null)
+                    {
+                        _context.Segurados.Remove(this);
+                        _context.Pessoas.Remove(this.IdPessoaNavigation);
+                        _context.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+                throw;
+            }
+
+            return true;
+        }
     }
 }
