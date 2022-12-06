@@ -17,7 +17,7 @@ namespace ApoliSys.Controllers
         [Route("Segurado/{IdSegurado:int}/Veiculo")]
         public IActionResult Index(int IdSegurado)
         {
-            var veiculos = _context.Veiculos.Where(v => v.IdSegurado == IdSegurado).ToList();
+            var veiculos = _context.Veiculos.Where(v => v.IdSegurado == IdSegurado).ToList().OrderBy(v => v.Marca);
 
             ViewBag.IdSegurado = IdSegurado;
 
@@ -28,7 +28,7 @@ namespace ApoliSys.Controllers
         [Route("Segurado/{IdSegurado:int}/Veiculo/Cadastrar")]
         public IActionResult Cadastrar(int IdSegurado)
         {
-            var segurado = _context.Segurados.FirstOrDefault(s => s.Id == IdSegurado);
+            var segurado = _context.Segurados.SingleOrDefault(s => s.Id == IdSegurado);
 
             ViewBag.IdSegurado = segurado.Id;
 
@@ -38,8 +38,6 @@ namespace ApoliSys.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Veiculo veiculo) 
         {
-            Debug.WriteLine(veiculo.Km.ToString());
-
             if (veiculo.Cadastrar() == false) 
             {
                 return Ok(new {
@@ -70,24 +68,80 @@ namespace ApoliSys.Controllers
             return View(veiculo);
         }
 
-        /* [HttpPost]
-        [Route("Veiculo/Modificar/{IdVeiculo:int}")]
-        public IActionResult Modificar(int IdVeiculo) {
-            
-        } */
+        [HttpPut]
+        [Route("Veiculo/Modificar")]
+        public IActionResult Modificar(Veiculo veiculo) {
+            try
+            {
+                int IdVeiculo = veiculo.Id;
+
+                var Veiculo = _context.Veiculos.SingleOrDefault(v => v.Id == IdVeiculo);
+
+                if (Veiculo != null)
+                {
+                    if (Veiculo.Modificar(veiculo) == false)
+                    {
+                        return Ok(new {
+                            sucesso = 0,
+                            mensagem = "Algo deu errado ao modificar o Veículo.",
+                        });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return Ok(new {
+                    sucesso = 0,
+                    mensagem = "Algo deu errado ao modificar o Veículo."
+                });
+                throw;
+            }
+
+            return Ok(new {
+                sucesso = 1,
+                mensagem = "Veículo Modificado!",
+                urlRedirecionamento = "Segurado/" + veiculo.IdSegurado + "/Veiculo",
+            });
+        }
 
         [HttpGet]
-        [Route("Segurado/{IdSegurado:int}/Veiculo/{idVeiculo:int}")]
-        public IActionResult Informacoes (int IdSegurado, int idVeiculo) {
+        [Route("Segurado/{IdSegurado:int}/Veiculo/{IdVeiculo:int}")]
+        public IActionResult Informacoes (int IdSegurado, int IdVeiculo) {
             var veiculo = _context.Veiculos
             .Where(v => v.IdSegurado == IdSegurado)
-            .FirstOrDefault(v => v.Id == idVeiculo);
+            .SingleOrDefault(v => v.Id == IdVeiculo);
 
             if (veiculo == null) {
                 return NotFound();
             }
 
             return View(veiculo);
+        }
+
+        [HttpDelete]
+        [Route("Veiculo/Remover/{IdVeiculo:int}")]
+        public IActionResult Remover(int IdVeiculo)
+        {
+            var veiculo = _context.Veiculos
+            .SingleOrDefault(v => v.Id == IdVeiculo);
+
+            if (veiculo != null)
+            {
+                if (veiculo.Remover() == false)
+                {
+                    return Ok(new {
+                        sucesso = 0,
+                        mensagem = "Algo deu errado ao remover o Veículo."
+                    });
+                }
+            }
+
+            return Ok(new {
+                sucesso = 1,
+                mensagem = "Veículo removido!",
+                urlRedirecionamento = "Segurado/" + veiculo.IdSegurado + "/Veiculo"
+            });
         }
     }
 }

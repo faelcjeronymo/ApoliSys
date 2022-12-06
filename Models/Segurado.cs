@@ -105,7 +105,6 @@ namespace ApoliSys.Models
             {
                 if (this.Id != 0)
                 {
-                    Debug.WriteLine(this.IdPessoaNavigation.Id);
                     
                     Segurado segurado = this;
 

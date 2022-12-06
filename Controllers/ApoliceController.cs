@@ -26,7 +26,9 @@ namespace ApoliSys.Controllers
         [Route("Cotacao/{IdCotacao:int}/Apolice/Cadastrar")]
         public IActionResult Cadastrar(int IdCotacao)
         {
-            var IdUltimaApoliceEmitida = _context.Apolices.OrderByDescending(a => a.Id).FirstOrDefault().Id;
+            //Todo - Refazer lógica de cadastro de apolices
+            
+            int IdUltimaApoliceEmitida = _context.Apolices.OrderByDescending(a => a.Id).First().Id;
 
             ViewBag.NumeroApolice = IdUltimaApoliceEmitida + 1;
 
@@ -38,6 +40,7 @@ namespace ApoliSys.Controllers
         }
 
         [HttpPost]
+        [Route("Apolice/Cadastrar")]
         public IActionResult Cadastrar(Apolice apolice)
         {
             string mensagemValidacaoApolice = apolice.ValidarApolice();

@@ -12,6 +12,8 @@ namespace ApoliSys.Models
             Cotacaos = new HashSet<Cotacao>();
         }
 
+        ApoliSysContext _context = new ApoliSysContext();
+
         public int Id { get; set; }
         public int IdSegurado { get; set; }
         public string CodigoFipe { get; set; } = null!;
@@ -29,11 +31,10 @@ namespace ApoliSys.Models
         public virtual Segurado IdSeguradoNavigation { get; set; } = null!;
         public virtual ICollection<Cotacao> Cotacaos { get; set; }
 
-        public bool Cadastrar() {
+        public bool Cadastrar() 
+        {
             try
             {
-                ApoliSysContext _context = new ApoliSysContext();
-
                 CodigoFipe = CodigoFipe.Replace("-", "");
 
                 TextInfo cultInfo = new CultureInfo("pt-BR", false).TextInfo;
@@ -47,6 +48,56 @@ namespace ApoliSys.Models
                 _context.SaveChanges();
             }
             catch (System.Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+
+            return true;
+        }
+
+        public bool Modificar(Veiculo NovasInfoVeiculo)
+        {
+            try
+            {
+                CodigoFipe = NovasInfoVeiculo.CodigoFipe.Replace("-", "");
+                TextInfo cultInfo = new CultureInfo("pt-BR", false).TextInfo;
+                Modelo = cultInfo.ToTitleCase(NovasInfoVeiculo.Modelo);
+                Ano = NovasInfoVeiculo.Ano;
+                Marca = NovasInfoVeiculo.Marca;
+                Categoria = NovasInfoVeiculo.Categoria;
+                Placa = NovasInfoVeiculo.Placa.Replace("-", "");
+                Renavam = NovasInfoVeiculo.Renavam;
+                Km = NovasInfoVeiculo.Km;
+                ZeroKm = NovasInfoVeiculo.ZeroKm;
+                Combustivel = NovasInfoVeiculo.Combustivel;
+                Utilizacao = NovasInfoVeiculo.Utilizacao;
+
+                _context.Update(this);
+
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+
+            return true;
+        }
+
+        public bool Remover() {
+            try
+            {
+                if (this.Id != 0)
+                {
+                    _context.Veiculos.Remove(this);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine(e.InnerException);
                 return false;

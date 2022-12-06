@@ -23,12 +23,14 @@ namespace ApoliSys.Controllers
             _logger = logger;
         }
 
+        // meudominio.com/Segurado/
         public IActionResult Index()
         {
             var Segurados = _context.Segurados.Include(s => s.IdPessoaNavigation);
             return View(Segurados.ToList().OrderBy(s => s.IdPessoaNavigation.Nome));
         }
 
+        // /Segurado/Cadastrar
         public IActionResult Cadastrar()
         {
             return View();
@@ -198,7 +200,7 @@ namespace ApoliSys.Controllers
 
             return Ok(new {
                 sucesso = 1,
-                mensagem = "Segurado removido!",
+                mensagem = "Segurado Removido!",
                 urlRedirecionamento = "Segurado/"
             });
         }

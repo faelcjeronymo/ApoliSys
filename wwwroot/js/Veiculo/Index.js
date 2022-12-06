@@ -4,7 +4,7 @@ $(window).on("load", function () {
         let idVeiculo = $(this).data("idVeiculo");
 
         let modal = `
-        <div class="modal fade" tabindex="-1" id="modal-remover-veiculo">
+        <div class="modal fade" tabindex="-1" id="modal-remover">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content border-0 shadow">
                     <div class="modal-header border-0">
@@ -15,7 +15,7 @@ $(window).on("load", function () {
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                        <a href="Veiculo/Remover/${idVeiculo}" role="button" class="btn btn-danger">Sim</a>
+                        <button onclick="removerInformacao('Veiculo', ${idVeiculo})" class="btn btn-danger">Sim</button>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@ $(window).on("load", function () {
 
         $("body").append(modal);
 
-        let modalRemoverVeiculo = new bootstrap.Modal($("#modal-remover-veiculo")[0]);
+        let modalRemoverVeiculo = new bootstrap.Modal($("#modal-remover")[0]);
 
         modalRemoverVeiculo.show();
     })

@@ -9,29 +9,31 @@
         <h5 class="text-primary text-center">Modificar uma Cotação</h5>
     </div>
 </div>
-<form id="form-cadastrar" action="/Cotacao/SalvarCadastrar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-modificar" action="/Cotacao/Modificar" method="PUT" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+    <input type="hidden" asp-for="Id" value="@Model.Id">
+    <input type="hidden" asp-for="IdVeiculo" value="@Model.IdVeiculo">
     <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="PlanoSeguro" class="form-label">Plano do Seguro<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="PlanoSeguro" asp-items="Html.GetEnumSelectList<plano_seguro>()" required>
+                <select form="form-modificar" asp-for="PlanoSeguro" asp-items="Html.GetEnumSelectList<plano_seguro>()" required>
                     <option value="" disabled selected>Selecione</option>
                 </select>
                 <span asp-validation-for="PlanoSeguro" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="ValorPremioSeguro" class="form-label">Valor do Prêmio<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="ValorPremioSeguro" class="form-control" placeholder="Ex. R$ 399,90" required/>
+                <input form="form-modificar" asp-for="ValorPremioSeguro" class="form-control" placeholder="Ex. R$ 399,90" required/>
                 <span asp-validation-for="ValorPremioSeguro" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="ValorTotalPremioSeguro" class="form-label">Valor Total do Prêmio<sup>*</sup></label>
-                <input form="form-cadastrar" asp-for="ValorTotalPremioSeguro" class="form-control" placeholder="Ex. R$ 3999,00" required/>
+                <input form="form-modificar" asp-for="ValorTotalPremioSeguro" class="form-control" placeholder="Ex. R$ 3999,00" required/>
                 <span asp-validation-for="ValorTotalPremioSeguro" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="FormaPagamento" class="form-label">Forma de Pagamento<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="FormaPagamento" asp-items="Html.GetEnumSelectList<forma_pagamento>()" required>
+                <select form="form-modificar" asp-for="FormaPagamento" asp-items="Html.GetEnumSelectList<forma_pagamento>()" required>
                     <option value="" disabled selected>Selecione</option>
                 </select>
                 <span asp-validation-for="FormaPagamento" class="invalid-feedback">Campo obrigatório</span>
@@ -42,7 +44,7 @@
     <div class="col-sm-11 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
         <div class="row">
             <div class="col-12 col-sm-3 ms-sm-auto">
-                <button type="submit" class="btn btn-primary w-100" form="form-cadastrar">Modificar</button>
+                <button type="submit" class="btn btn-primary w-100" form="form-modificar">Modificar</button>
             </div>
         </div>
     </div>

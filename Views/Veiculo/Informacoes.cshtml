@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Informações do Veículo";
 }
+
+<style>
+    .fa {
+        vertical-align: middle;
+    }
+</style>
+
 <div class="row h-100">
     <div class="col-12 col-sm-8 col-md-6 col-xl-4 col-xxl-3 m-auto">
         <div class="card border-0 shadow-sm">
@@ -14,7 +21,7 @@
                 <ul class="list-unstyled">
                     <li class="py-2">
                         <span class="text-primary">
-                            <i class="fa fa-hashtag text-primary fs-5 align-baseline fa-fw"></i>
+                            <i class="fa fa-hashtag text-primary fs-5 fa-fw"></i>
                             Código Fipe:
                         </span>
                         <span class="align-baseline">@string.Format(@"{0:00000\-00}", Convert.ToUInt64(Model.CodigoFipe))</span>
@@ -22,7 +29,7 @@
                     <hr class="my-1 mx-2 text-dark text-opacity-25">
                     <li class="py-2">
                         <span class="text-primary">
-                            <i class="fa fa-car-side text-primary fs-5 align-baseline fa-fw"></i>
+                            <i class="fa fa-car-side text-primary fs-5 fa-fw"></i>
                             Modelo:
                         </span>
                         <span class="align-top">@Html.DisplayFor(model => Model.Marca) - @Model.Modelo, @Model.Ano</span>
@@ -80,7 +87,7 @@
                     <hr class="my-1 mx-2 text-dark text-opacity-25">
                     <li class="py-2">
                         <span class="text-primary">
-                            <i class="fa fa-gas-pump text-primary fs-5 align-baseline fa-fw"></i>
+                            <i class="fa fa-gas-pump text-primary fs-5 fa-fw"></i>
                             Combustível:
                         </span>
                         <span class="align-top">@Html.DisplayFor(model => Model.Combustivel)</span>

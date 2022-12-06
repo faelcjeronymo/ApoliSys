@@ -56,10 +56,10 @@
                     </tr>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr class='@(item.Status == status_cotacao.negada ? "table-line-disabled" : "")'>
                             <td class="cotacao-plano">
                                 <div class="avatar avatar-circle avatar-xs">
-                                        <i class="fa fa-list-check align-middle"></i>
+                                    <i class="fa fa-list-check align-middle"></i>
                                 </div>
                                 <span>
                                     @Html.DisplayFor(modelItem => item.PlanoSeguro)
@@ -76,22 +76,38 @@
                             </td>
                             <td class="cotacao-status">
                                 <div class="table-cell-icon">
-                                    <i class="fa fa-clock clock-gray"></i>
+                                    @if (item.Status == status_cotacao.em_analise)
+                                    {
+                                        <i class="fa fa-clock clock-gray"></i>
+                                    } else if (item.Status == status_cotacao.aprovada) 
+                                    {
+                                        <i class="fa fa-circle-check circle-check-green"></i>
+                                    } else
+                                    {
+                                        <i class="fa fa-times-circle times-circle-red me-1 fs-5"></i>
+                                    }
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </div>
                             </td>
                             <td class="table-cell-buttons">
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-table me-2">
-                                        <i class="fa fa-pen"></i>
-                                    </button>
-                                    <button class="btn btn-table me-2 aprovar">
+                                    @if (item.Status == status_cotacao.negada)
+                                    {
+                                        <button class="btn btn-table me-2" disabled>
+                                            <i class="fa fa-pen"></i>
+                                        </button>
+                                    } else {
+                                        <a href="~/Veiculo/@item.IdVeiculo/Cotacao/Modificar/@item.Id" class="btn btn-table me-2" >
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                    }
+                                    <button class="btn btn-table me-2 aprovar" data-id-cotacao="@item.Id" @(item.Status == status_cotacao.em_analise ? "" : "disabled")>
                                         <i class="fa fa-circle-check"></i>
                                     </button>
-                                    <button class="btn btn-table me-2 negar">
+                                    <button class="btn btn-table me-2 negar" data-id-cotacao="@item.Id" @(item.Status == status_cotacao.em_analise ? "" : "disabled")>
                                         <i class="fa fa-times-circle"></i>
                                     </button>
-                                    <button class="btn btn-table remove ">
+                                    <button class="btn btn-table remove" data-id-cotacao="@item.Id">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -101,128 +117,6 @@
                             </td>
                         </tr>
                     }
-                    <tr class=" d-none"><!-- Em andamento -->
-                        <td class="cotacao-plano">
-                            <div class="avatar avatar-circle avatar-xs">
-                                    <i class="fa fa-list-check align-middle"></i>
-                            </div>
-                            <span>Seguro de Cobertura Básica</span>
-                        </td>
-                        <td class="cotacao-valor-pagamento">
-                            R$ 959,99
-                        </td>
-                        <td class="cotacao-valor-total">
-                            R$ 9599,99
-                        </td>
-                        <td class="cotacao-forma-pagamento">
-                            A Prazo (10x)
-                        </td>
-                        <td class="cotacao-status">
-                            <div class="table-cell-icon">
-                                <i class="fa fa-clock clock-gray"></i>
-                                Em andamento
-                            </div>
-                        </td>
-                        <td class="table-cell-buttons">
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-table me-2">
-                                    <i class="fa fa-pen"></i>
-                                </button>
-                                <button class="btn btn-table me-2 aprovar">
-                                    <i class="fa fa-circle-check"></i>
-                                </button>
-                                <button class="btn btn-table me-2 negar">
-                                    <i class="fa fa-times-circle"></i>
-                                </button>
-                                <button class="btn btn-table remove ">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr class=" d-none"><!-- Aprovada -->
-                        <td class="cotacao-plano">
-                            <div class="avatar avatar-circle avatar-xs">
-                                    <i class="fa fa-list-check align-middle"></i>
-                            </div>
-                            <span>Seguro de Cobertura Básica</span>
-                        </td>
-                        <td class="cotacao-valor-pagamento">
-                            R$ 959,99
-                        </td>
-                        <td class="cotacao-valor-total">
-                            R$ 9599,99
-                        </td>
-                        <td class="cotacao-forma-pagamento">
-                            A Prazo (10x)
-                        </td>
-                        <td class="cotacao-status">
-                            <div class="table-cell-icon">
-                                <i class="fa fa-circle-check circle-check-green"></i>
-                                Aprovada
-                            </div>
-                        </td>
-                        <td class="table-cell-buttons">
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-table me-2">
-                                    <i class="fa fa-pen"></i>
-                                </button>
-                                <button class="btn btn-table me-2 border-0 aprovar" disabled>
-                                    <i class="fa fa-circle-check"></i>
-                                </button>
-                                <button class="btn btn-table me-2 border-0 negar" disabled>
-                                    <i class="fa fa-times-circle"></i>
-                                </button>
-                                <button class="btn btn-table remove ">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <a class="stretched-link" href="/apolices/"></a>
-                        </td>
-                    </tr>
-                    <tr class="table-line-disabled d-none"><!-- Cancelada -->
-                        <td class="cotacao-plano">
-                            <div class="avatar avatar-circle avatar-xs">
-                                    <i class="fa fa-list-check align-middle"></i>
-                            </div>
-                            <span>Seguro de Cobertura Básica</span>
-                        </td>
-                        <td class="cotacao-valor-pagamento">
-                            R$ 959,99
-                        </td>
-                        <td class="cotacao-valor-total">
-                            R$ 9599,99
-                        </td>
-                        <td class="cotacao-forma-pagamento">
-                            A Prazo (10x)
-                        </td>
-                        <td class="cotacao-status">
-                            <div class="table-cell-icon">
-                                <i class="fa fa-times-circle times-circle-red me-1 fs-5"></i>
-                                Cancelada
-                            </div>
-                        </td>
-                        <td class="table-cell-buttons">
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-table me-2 border-0" disabled>
-                                    <i class="fa fa-pen"></i>
-                                </button>
-                                <button class="btn btn-table me-2 border-0 aprovar" disabled>
-                                    <i class="fa fa-circle-check"></i>
-                                </button>
-                                <button class="btn btn-table me-2 border-0 negar" disabled>
-                                    <i class="fa fa-times-circle"></i>
-                                </button>
-                                <button class="btn btn-table remove">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
                 </tbody>
             </table>
         </div>

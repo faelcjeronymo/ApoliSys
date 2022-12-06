@@ -53,18 +53,13 @@
                 <span asp-validation-for="Renavam" class="invalid-feedback">Campo obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
-                <label asp-for="ZeroKm" class="form-label">Zero Km<sup>*</sup></label>
-                <select form="form-cadastrar" asp-for="ZeroKm" required>
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="0">Não</option>
-                    <option value="1">Sim</option>
-                </select>
-                <span asp-validation-for="ZeroKm" class="invalid-feedback">Campo obrigatório</span>
-            </div>
-            <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Km" class="form-label">Quilometragem<sup>*</sup></label>
                 <input form="form-cadastrar" asp-for="Km" class="form-control" placeholder="Ex. 138.000" type="text" required value="" asp-format="{000.000.000.000}">
                 <span asp-validation-for="Km" class="invalid-feedback">Campo obrigatório</span>
+                <div class="form-check form-switch mt-1 d-flex">
+                    <input class="form-check-input" asp-for="ZeroKm" value="true" type="checkbox" role="switch" onchange="desabilitarQuilometragem()">
+                    <label class="form-check-label align-self-center ms-1" for="ZeroKm">Zero Km</label>
+                </div>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Combustivel" class="form-label">Combustivel<sup>*</sup></label>
@@ -73,7 +68,7 @@
                 </select>
                 <span asp-validation-for="Combustivel" class="invalid-feedback">Campo obrigatório</span>
             </div>
-            <div class="col-sm-10 col-md-12 form-group">
+            <div class="col-sm-5 col-md-6 form-group">
                 <label asp-for="Utilizacao" class="form-label">Utilização<sup>*</sup></label>
                 <input form="form-cadastrar" asp-for="Utilizacao" type="text" class="form-control" placeholder="Ex. Utilização Familiar" required>
                 <span asp-validation-for="Utilizacao" class="invalid-feedback">Campo obrigatório</span>

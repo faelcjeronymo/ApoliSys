@@ -24,7 +24,8 @@ namespace ApoliSys.Models
         public virtual Veiculo IdVeiculoNavigation { get; set; } = null!;
         public virtual ICollection<Apolice> Apolices { get; set; }
 
-        public bool Cadastrar () {
+        public bool Cadastrar () 
+        {
             try
             {
                 _context.Cotacaos.Add(this);
@@ -35,6 +36,92 @@ namespace ApoliSys.Models
             {
                 Debug.WriteLine(e.InnerException);
                 return false;
+                throw;
+            }
+
+            return true;
+        }
+
+        public bool Modificar(Cotacao NovasInfoCotacao)
+        {
+            try
+            {
+                PlanoSeguro = NovasInfoCotacao.PlanoSeguro;
+                ValorPremioSeguro = NovasInfoCotacao.ValorPremioSeguro;
+                ValorTotalPremioSeguro = NovasInfoCotacao.ValorTotalPremioSeguro;
+                FormaPagamento = NovasInfoCotacao.FormaPagamento;
+
+                _context.Update(this);
+                _context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+
+            return true;
+        }
+        
+        public bool Aprovar() 
+        {
+            try
+            {
+                Status = status_cotacao.aprovada;
+
+                _context.Update(this);
+
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+            
+            return true;
+        }
+        
+        public bool Negar() 
+        {
+            try
+            {
+                Status = status_cotacao.negada;
+
+                _context.Update(this);
+
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                return false;
+                throw;
+            }
+            
+            return true;
+        }
+
+        public bool Remover()
+        {
+            try
+            {
+                if (this.Id != 0)
+                {
+                    _context.Remove(this);
+
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+                
+                return false;
+                
                 throw;
             }
 
