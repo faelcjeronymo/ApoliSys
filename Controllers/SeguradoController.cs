@@ -99,7 +99,7 @@ namespace ApoliSys.Controllers
         }
 
         [HttpPut]
-        [Route("Segurado/Modificar/{IdSegurado:int}")]
+        [Route("Segurado/Modificar")]
         public IActionResult Modificar(Segurado segurado)
         {
 

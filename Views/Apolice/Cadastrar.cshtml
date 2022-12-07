@@ -14,12 +14,12 @@
     <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-5 col-md-6 form-group">
-                <label asp-for="ProcessoSusep" class="form-label">N<sup>o</sup> Processo SUSEP</label>
+                <label asp-for="ProcessoSusep" class="form-label">N<sup class="text-dark">o</sup> Processo SUSEP</label>
                 <input form="form-cadastrar" asp-for="ProcessoSusep" class="form-control" placeholder="Ex. 12345678910111213141" type="number" required value=""/>
                 <span asp-validation-for="ProcessoSusep" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
-                <label asp-for="NumeroApolice" class="form-label">N<sup>o</sup> Apólice</label>
+                <label asp-for="NumeroApolice" class="form-label">N<sup class="text-dark">o</sup> Apólice</label>
                 <input form="form-cadastrar" asp-for="NumeroApolice" class="form-control" placeholder="Ex. 012345678" type="number" required value='@String.Format("{0:000000000}", @ViewBag.NumeroApolice)'/>
                 <span asp-validation-for="NumeroApolice" class="invalid-feedback">Campo Obrigatório</span>
             </div>

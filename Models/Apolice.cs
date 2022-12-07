@@ -20,20 +20,24 @@ namespace ApoliSys.Models
 
         public virtual Cotacao IdCotacaoNavigation { get; set; } = null!;
 
-        public string ValidarApolice() {
-            string mensagemValidacao = "Ok";
-
-            if (ProcessoSusep.Length != 20) {
-                mensagemValidacao = "Por favor, digite um número de processo SUSEP com até 20 caracteres.";
-                return mensagemValidacao;
+        public bool ValidarProcessoSusep() 
+        {
+            if (ProcessoSusep.Length != 20) 
+            {
+                return false;
             }
 
-            if (NumeroApolice.Length != 9) {
-                mensagemValidacao = "Por favor, digite um número de apólice com até 9 caracteres.";
-                return mensagemValidacao;
+            return true;
+        }
+
+        public bool ValidarNumeroApolice() 
+        {
+            if (NumeroApolice.Length != 9) 
+            {
+                return false;
             }
 
-            return mensagemValidacao;
+            return true;
         }
 
         public bool Cadastrar() {
@@ -58,5 +62,72 @@ namespace ApoliSys.Models
 
             return true;
         }
+
+        public bool Modificar(Apolice NovasInfoApolice)
+        {
+            try
+            {
+                ProcessoSusep = NovasInfoApolice.ProcessoSusep;
+                DataTermino = NovasInfoApolice.DataTermino;
+
+                _context.Update(this);
+
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+
+                return false;
+
+                throw;
+            }
+
+            return true;
+        }
+        
+        public bool Cancelar()
+        {
+            try
+            {
+                this.Status = status_apolice.cancelada;
+
+                _context.Update(this);
+
+                _context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+
+                return false;
+
+                throw;
+            }
+
+            return true;
+        }
+
+        public bool Remover()
+        {
+            try
+            {
+                _context.Remove(this);
+
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.InnerException);
+
+                return false;
+
+                throw;
+            }
+
+            return true;
+        }
+        
     }
 }

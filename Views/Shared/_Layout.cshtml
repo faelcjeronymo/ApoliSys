@@ -40,7 +40,7 @@
                                         <span>Cadastrados</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="d-none">
                                     <a href="#" class="btn btn-toggle">
                                         <i class="fa fa-plus me-1"></i>
                                         <span>Cadastrar</span>
@@ -63,7 +63,7 @@
                                         <span>Cadastrados</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="d-none">
                                     <a asp-controller="Veiculo" asp-action="Cadastrar" class="btn btn-toggle">
                                         <i class="fa fa-plus me-1"></i>
                                         <span>Cadastrar</span>
@@ -86,7 +86,7 @@
                                         <span>Geradas</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="d-none">
                                     <a href="#" class="btn btn-toggle">
                                         <i class="fa fa-plus me-1"></i>
                                         <span>Gerar</span>
@@ -109,7 +109,7 @@
                                         <span>Emitidas</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="d-none">
                                     <a href="#" class="btn btn-toggle">
                                         <i class="fa fa-plus me-1"></i>
                                         <span>Emitir</span>
@@ -118,7 +118,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="sidebar-nav-item">
+                    <li class="sidebar-nav-item d-none">
                         <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#usuarios-submenu" aria-expanded="false">
                             <i class="fa fa-user-gear sidebar-nav-item-icon"></i>
                             <span>Usuários</span>
@@ -149,13 +149,13 @@
             <header>
                 <nav class="navbar header px-4">
                     <div class="container-fluid justify-content-between">
-                        <button class="navbar-toggler px-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Expandir Sidebar">
+                        <button class="navbar-toggler px-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Expandir Sidebar" style="visibility: hidden;">
                             <i class="fa fa-bars"></i>
                         </button>
                         <a href="/" class="text-decoration-none navbar-header-logo d-none d-md-block ms-5 ps-4">
                             <span class="text-white h3 fw-semibold m-0">Apoli</span><span class="text-primary-dark h3 fw-semibold m-0">Sys</span>
                         </a>
-                        <div class="navbar-profile dropdown">
+                        <div class="navbar-profile dropdown" style="visibility: hidden;">
                             <a class="navbar-profile-toggler" data-bs-toggle="dropdown" aria-expanded="false" role="button"></a>
                             <span class="navbar-profile-text fw-semibold me-1">Meu Perfil</span>
                             <i class="fa fa-chevron-down navbar-profile-arrow"></i>

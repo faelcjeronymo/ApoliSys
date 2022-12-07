@@ -49,7 +49,7 @@
                     </tr>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr class='@(item.Status == status_apolice.cancelada ? "table-line-disabled" : "")'>
                             <td class="apolice-numero">
                                 <div class="avatar avatar-circle avatar-xs">
                                     <i class="fa fa-file-alt align-middle"></i>
@@ -71,19 +71,19 @@
                                     } else
                                     {
                                         <i class="fa fa-times-circle times-circle-red"></i>
-                                        <span>@Html.DisplayFor(modelItem => item.Status);</span>
+                                        <span>@Html.DisplayFor(modelItem => item.Status)</span>
                                     }
                                 </div>
                             </td>
                             <td class="table-cell-buttons">
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-table me-2">
+                                    <a href="~/Cotacao/@item.IdCotacao/Apolice/Modificar/@item.Id" class='btn btn-table me-2 @(item.Status == status_apolice.cancelada ? "disabled" : "")'>
                                         <i class="fa fa-pen"></i>
-                                    </button>
-                                    <button class="btn btn-table me-2 border-0 cancelar">
+                                    </a>
+                                    <button class="btn btn-table me-2 border-0 cancelar" data-id-apolice="@item.Id" @(item.Status == status_apolice.cancelada ? "disabled" : "")>
                                         <i class="fa fa-times-circle"></i>
                                     </button>
-                                    <button class="btn btn-table remove">
+                                    <button class="btn btn-table remove" data-id-apolice="@item.Id">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>

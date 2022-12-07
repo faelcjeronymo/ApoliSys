@@ -9,22 +9,24 @@
         <h5 class="text-primary text-center">Modificar uma Apólice</h5>
     </div>
 </div>
-<form id="form-cadastrar" action="/Apolice/SalvarModificar" method="POST" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+<form id="form-cadastrar" action="/Apolice/Modificar" method="PUT" class="row gy-3 tab-content step-form needs-validation justify-content-md-center" novalidate>
+    <input type="hidden" asp-for="Id" value="@Model.Id">
+    <input type="hidden" asp-for="IdCotacao" value="@Model.IdCotacao">
     <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4 tab-pane show active fade" id="step-one-pane">
         <div class="row gy-2 justify-content-sm-center">
             <div class="col-sm-5 col-md-6 form-group">
-                <label asp-for="ProcessoSusep" class="form-label">N<sup>o</sup> Processo SUSEP</label>
+                <label asp-for="ProcessoSusep" class="form-label">N<sup class="text-dark">o</sup> Processo SUSEP</label>
                 <input form="form-cadastrar" asp-for="ProcessoSusep" class="form-control" placeholder="Ex. 12345678910111213141" type="number" required/>
                 <span asp-validation-for="ProcessoSusep" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group">
-                <label asp-for="NumeroApolice" class="form-label">N<sup>o</sup> Apólice</label>
-                <input form="form-cadastrar" asp-for="NumeroApolice" class="form-control" placeholder="Ex. 012345678" type="number" required/>
+                <label asp-for="NumeroApolice" class="form-label">N<sup class="text-dark">o</sup> Apólice</label>
+                <input form="form-cadastrar" asp-for="NumeroApolice" class="form-control" placeholder="Ex. 012345678" type="number" required disabled/>
                 <span asp-validation-for="NumeroApolice" class="invalid-feedback">Campo Obrigatório</span>
             </div>
             <div class="col-sm-5 col-md-6 form-group me-auto">
                 <label asp-for="DataTermino" class="form-label">Término da Vigência</label>
-                <input form="form-cadastrar" asp-for="DataTermino" class="form-control" required/>
+                <input form="form-cadastrar" asp-for="DataTermino" type="date" class="form-control" required/>
                 <span asp-validation-for="DataTermino" class="invalid-feedback">Campo Obrigatório</span>
             </div>
         </div>
